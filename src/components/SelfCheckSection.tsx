@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, RotateCcw, Check, Heart, Shield, MessageCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, RotateCcw, Heart, Shield, MessageCircle, Calendar } from 'lucide-react';
 import { Language } from '../types/clinic';
 import { TRANSLATIONS } from '../data/translations';
 import { CLINIC_CONTACT } from '../data/clinicData';
+import { useTilt3D } from '../hooks/useTilt3D';
 
 interface SelfCheckSectionProps {
   language: Language;
@@ -11,6 +12,7 @@ interface SelfCheckSectionProps {
 
 export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, onOpenBooking }) => {
   const t = TRANSLATIONS[language];
+  const containerTilt = useTilt3D(4);
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -79,7 +81,6 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
   };
 
   const getRecommendation = () => {
-    // Generate caring clinical insight
     const isHighDistress = answers[0] === 2 || answers[1] === 2;
     const preference = answers[2];
 
@@ -129,17 +130,30 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
   };
 
   return (
-    <section id="self-check" className="py-20 lg:py-28 bg-[#f3f7f5] relative">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section id="self-check" className="py-20 lg:py-28 bg-[#f3f7f5] relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold-600">
+            <span className="h-0.5 w-6 bg-gold-500 rounded-full" />
             <Sparkles size={14} className="text-gold-500" />
             <span>{t.selfEyebrow}</span>
+            <span className="h-0.5 w-6 bg-gold-500 rounded-full" />
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl font-medium text-teal-brand tracking-tight text-balance">
-            {t.selfHeading}
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-teal-brand tracking-tight text-balance">
+            {language === 'mr' ? (
+              <>
+                तुमच्या मनाचे ऐका: <span className="font-serif italic text-gold-600 font-normal">२ मिनिटांचे स्व-चिंतन</span>
+              </>
+            ) : (
+              <>
+                Listen to Your Mind: <span className="font-serif italic text-gold-600 font-normal">2-Minute Gentle Check</span>
+              </>
+            )}
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -147,8 +161,14 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
           </p>
         </div>
 
-        {/* Self Check Card Container */}
-        <div className="mt-12 card-premium rounded-3xl p-6 sm:p-10 bg-white relative reveal-on-scroll delay-100">
+        {/* 3D Self Check Card Container */}
+        <div
+          ref={containerTilt.cardRef}
+          onMouseMove={containerTilt.handleMouseMove}
+          onMouseLeave={containerTilt.handleMouseLeave}
+          style={containerTilt.style}
+          className="mt-12 card-3d rounded-3xl p-6 sm:p-10 bg-white border border-slate-200/90 shadow-2xl relative reveal-on-scroll delay-100"
+        >
           {!completed ? (
             <div className="space-y-6">
               {/* Progress Indicator */}
@@ -162,7 +182,7 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
               </div>
 
               {/* Question Title */}
-              <h3 className="text-lg sm:text-xl font-bold text-teal-brand leading-snug">
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-teal-brand leading-snug">
                 {language === 'mr' ? questions[step].titleMr : questions[step].titleEn}
               </h3>
 
@@ -173,11 +193,11 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
                     <button
                       key={idx}
                       onClick={() => handleSelectOption(idx)}
-                      className="w-full text-left p-4 rounded-2xl border border-teal-900/10 hover:border-teal-400 hover:bg-teal-50/50 bg-[#fafbf9] transition-all duration-200 flex items-center justify-between gap-3 text-sm font-medium text-slate-700 hover:text-teal-brand group"
+                      className="w-full text-left p-4 sm:p-5 rounded-2xl border border-teal-900/10 hover:border-gold-400 hover:bg-gold-50/40 bg-[#fafbf9] transition-all duration-200 flex items-center justify-between gap-4 text-sm font-medium text-slate-700 hover:text-teal-brand group shadow-2xs hover:shadow-md hover:-translate-y-0.5"
                     >
                       <span className="leading-relaxed">{opt}</span>
-                      <span className="h-6 w-6 rounded-full border border-teal-200 flex items-center justify-center shrink-0 group-hover:bg-teal-brand group-hover:text-white transition-colors">
-                        <ArrowRight size={13} />
+                      <span className="h-7 w-7 rounded-full border border-teal-200 flex items-center justify-center shrink-0 group-hover:bg-teal-brand group-hover:text-white transition-all group-hover:scale-110">
+                        <ArrowRight size={14} />
                       </span>
                     </button>
                   )
@@ -186,11 +206,11 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
 
               {/* Privacy Notice */}
               <div className="pt-4 flex items-center gap-2 text-[11px] text-slate-400">
-                <Shield size={13} className="text-emerald-600" />
+                <Shield size={14} className="text-emerald-600" />
                 <span>
                   {language === 'mr'
-                    ? 'ही तपासणी पूर्णपणे अनामिक व सुरक्षित आहे.'
-                    : 'This reflection is 100% private and stored nowhere.'}
+                    ? 'ही तपासणी पूर्णपणे अनामिक व सुरक्षित आहे. कोणताही वैयक्तिक डेटा सेव्ह केला जात नाही.'
+                    : 'This reflection is 100% private, anonymous, and stored nowhere.'}
                 </span>
               </div>
             </div>
@@ -220,57 +240,57 @@ export const SelfCheckSection: React.FC<SelfCheckSectionProps> = ({ language, on
                     ? 'तुम्ही एकटे नाही आहात; योग्य आधार उपलब्ध आहे.'
                     : 'You do not have to carry this alone.'}
                 </h3>
-
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {language === 'mr'
-                    ? 'तुमच्या उत्तरांवरून असे दिसते की खालील विभाग तुमच्यासाठी सर्वात योग्य आणि मार्गदर्शक ठरू शकतो:'
-                    : 'Based on your reflection, the most appropriate starting point for you is:'}
+                    ? 'तुमच्या उत्तरांवर आधारित डॉ. श्रद्धा पत्रिके यांच्या क्लिनिकल मार्गदर्शनाची दिशा खालीलप्रमाणे सुचवली जाते:'
+                    : 'Based on your reflection, here is a thoughtful clinical direction for your care journey with Dr. Shradha Patrike:'}
                 </p>
               </div>
 
-              {/* Recommended Service Highlight */}
+              {/* Recommendation Card */}
               {recommendation && (
-                <div className="p-5 sm:p-6 rounded-2xl bg-teal-50 border border-teal-200 space-y-3">
-                  <div className="flex items-center gap-2 text-teal-brand font-bold text-lg">
-                    <Check size={18} className="text-emerald-600" />
-                    <span>
-                      {language === 'mr' ? recommendation.titleMr : recommendation.titleEn}
+                <div className="p-5 sm:p-6 rounded-2xl bg-teal-50/70 border border-teal-200 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-700">
+                      {language === 'mr' ? 'सुचवलेला विभाग' : 'Recommended Care Pathway'}
+                    </span>
+                    <span className="text-[11px] font-bold text-gold-600 bg-white px-2.5 py-0.5 rounded-full border border-gold-200">
+                      Tailored
                     </span>
                   </div>
+
+                  <h4 className="text-lg sm:text-xl font-bold text-teal-brand">
+                    {language === 'mr' ? recommendation.titleMr : recommendation.titleEn}
+                  </h4>
+
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     {language === 'mr' ? recommendation.adviceMr : recommendation.adviceEn}
                   </p>
                 </div>
               )}
 
-              {/* Actions: Send WhatsApp & Book */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              {/* CTA Buttons */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
                 <button
-                  onClick={handleSendWhatsAppSummary}
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-6 py-3.5 shadow-medium transition-all duration-200 hover:-translate-y-0.5"
+                  onClick={() => onOpenBooking(recommendation?.serviceId)}
+                  className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-teal-brand hover:bg-teal-800 text-white font-semibold text-xs sm:text-sm shadow-md transition-all hover:-translate-y-0.5 btn-interactive"
                 >
-                  <MessageCircle size={17} />
+                  <Calendar size={15} />
                   <span>
-                    {language === 'mr'
-                      ? 'या संदर्भात व्हॉट्सअ‍ॅपवर बोला'
-                      : 'Discuss on WhatsApp with Clinic'}
+                    {language === 'mr' ? 'तपासणीसाठी वेळ निश्चित करा' : 'Schedule Consultation'}
                   </span>
                 </button>
 
                 <button
-                  onClick={() => onOpenBooking(recommendation?.serviceId)}
-                  className="inline-flex items-center gap-2 rounded-full border border-teal-900/20 bg-white hover:bg-cream-100 text-teal-brand font-semibold text-xs sm:text-sm px-6 py-3.5 shadow-2xs transition-colors"
+                  onClick={handleSendWhatsAppSummary}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full border border-emerald-600 text-emerald-800 bg-emerald-50/80 hover:bg-emerald-100 font-semibold text-xs sm:text-sm transition-all shadow-xs"
                 >
-                  <span>{t.bookConsultation}</span>
+                  <MessageCircle size={15} className="text-emerald-600" />
+                  <span>
+                    {language === 'mr' ? 'व्हॉट्सअॅपवर सल्ला विचारा' : 'Chat via WhatsApp'}
+                  </span>
                 </button>
               </div>
-
-              {/* Disclaimer */}
-              <p className="text-[11px] text-slate-400 leading-relaxed pt-2">
-                {language === 'mr'
-                  ? '* ही स्व-तपासणी केवळ प्राथमिक मार्गदर्शनासाठी आहे. हे कोणतेही अंतिम वैद्यकीय निदान नसून प्रत्यक्ष डॉक्टरांशी भेटणे आवश्यक आहे.'
-                  : '* This self-reflection is for awareness and guidance only. It is not a clinical diagnosis. Always consult a qualified medical doctor.'}
-              </p>
             </div>
           )}
         </div>

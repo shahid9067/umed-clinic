@@ -12,6 +12,7 @@ export const CLINIC_CONTACT = {
   hoursWeekday: 'Monday – Saturday: 10:00 AM – 8:00 PM',
   hoursSunday: 'Sunday: By Prior Appointment / Emergency',
   whatsappBaseUrl: 'https://wa.me/919067089323',
+  whatsappDirect: 'https://wa.me/919067089323',
 };
 
 export const DOCTOR_INFO: DoctorInfo = {

@@ -6,7 +6,10 @@
   :root {
     color-scheme: light;
     --brand-teal: #0f3d43;
+    --brand-teal-dark: #0a292d;
     --brand-gold: #b88e38;
+    --brand-gold-dark: #9e732c;
+    --brand-cream: #fafaf7;
   }
 
   html {
@@ -46,36 +49,73 @@
     text-wrap: pretty;
   }
 
+  /* 3D Perspective Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Ultra-Premium Glassmorphism Panels */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(15, 61, 67, 0.08);
+    box-shadow: 0 10px 30px -5px rgba(15, 61, 67, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
   }
 
-  .glass-teal {
-    background: rgba(15, 61, 67, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+  .glass-card-luxury {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 40px -8px rgba(15, 61, 67, 0.08), 0 4px 12px -2px rgba(15, 61, 67, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
   }
 
-  /* Luxurious Interactive Card with 3D lift & shadow bloom */
-  .card-premium {
+  .glass-teal-luxury {
+    background: linear-gradient(135deg, rgba(15, 61, 67, 0.96) 0%, rgba(10, 41, 45, 0.94) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(184, 142, 56, 0.35);
+    box-shadow: 0 24px 60px -12px rgba(15, 61, 67, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* 3D Depth Card with Specular Highlight and Layered Elevation */
+  .card-3d {
     background: #ffffff;
     border: 1px solid rgba(15, 61, 67, 0.08);
-    box-shadow: 0 4px 20px -2px rgba(15, 61, 67, 0.04), 0 2px 6px -1px rgba(15, 61, 67, 0.02);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    box-shadow: 0 6px 20px -2px rgba(15, 61, 67, 0.05), 0 2px 6px -1px rgba(15, 61, 67, 0.02), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
     will-change: transform, box-shadow;
   }
 
-  .card-premium:hover {
-    transform: translateY(-8px) scale(1.005);
-    box-shadow: 0 24px 48px -10px rgba(15, 61, 67, 0.16), 0 10px 20px -3px rgba(15, 61, 67, 0.08);
+  .card-3d:hover {
+    transform: translateY(-9px) scale(1.01);
+    box-shadow: 0 28px 60px -12px rgba(15, 61, 67, 0.16), 0 12px 24px -4px rgba(184, 142, 56, 0.14), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
     border-color: rgba(184, 142, 56, 0.45);
   }
 
-  /* Interactive smooth button with hover float and tactile press */
+  /* Subtle Gold Shimmer Typography */
+  .gold-shimmer {
+    background: linear-gradient(90deg, #9e732c 0%, #dfc476 50%, #9e732c 100%);
+    background-size: 200% 100%;
+    animation: gold-shimmer-run 6s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Tactile Interactive Button */
   .btn-interactive {
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
     will-change: transform;
@@ -89,8 +129,13 @@
 }
 
 /* ==========================================================
-   PAGE ENTRANCE ANIMATIONS (Triggered on site visit)
+   KEYFRAME ANIMATIONS & MOTIONS
    ========================================================== */
+@keyframes gold-shimmer-run {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 @keyframes entrance-fade-down {
   0% {
     opacity: 0;
@@ -124,27 +169,21 @@
   }
 }
 
-.anim-entrance-down {
-  animation: entrance-fade-down 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.anim-entrance-up {
-  animation: entrance-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.anim-entrance-scale {
-  animation: entrance-scale-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* ==========================================================
-   CONTINUOUS IDLE & MOTION EFFECTS
-   ========================================================== */
 @keyframes float-smooth {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-9px) rotate(0.4deg);
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 
@@ -174,7 +213,7 @@
     box-shadow: 0 0 0 0 rgba(184, 142, 56, 0.25);
   }
   50% {
-    box-shadow: 0 0 20px 4px rgba(184, 142, 56, 0.2);
+    box-shadow: 0 0 24px 6px rgba(184, 142, 56, 0.28);
   }
 }
 
@@ -189,12 +228,33 @@
   }
 }
 
+@keyframes audio-wave {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.anim-entrance-down {
+  animation: entrance-fade-down 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-entrance-up {
+  animation: entrance-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-entrance-scale {
+  animation: entrance-scale-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .animate-float {
   animation: float-smooth 6.5s ease-in-out infinite;
 }
 
 .animate-float-delayed {
   animation: float-smooth 7s ease-in-out 1.5s infinite;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
 }
 
 .animate-spin-slow {
@@ -214,7 +274,7 @@
 }
 
 /* ==========================================================
-   SCROLL REVEAL SYSTEM (Silky smooth glide & fade-in)
+   SCROLL REVEAL SYSTEM (Silky smooth 60fps glide & fade-in)
    ========================================================== */
 .reveal-on-scroll {
   opacity: 1;
@@ -223,7 +283,6 @@
   will-change: opacity, transform;
 }
 
-/* Activated once JS is ready, safely hidden until scrolled into view */
 .reveal-ready .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
@@ -244,7 +303,7 @@
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
 
-/* Custom Scrollbar */
+/* Custom Luxury Scrollbar */
 ::-webkit-scrollbar {
   width: 9px;
 }

@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, onOpenBoo
       setIsScrolled(window.scrollY > 20);
 
       // Section scrollspy
-      const sections = ['home', 'about', 'doctor', 'care', 'facilities', 'self-check', 'approach', 'faq', 'visit'];
+      const sections = ['home', 'about', 'doctor', 'care', 'facilities', 'self-check', 'approach', 'stories', 'faq', 'visit'];
       const scrollPosition = window.scrollY + 140;
 
       for (const section of sections) {
@@ -60,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, onOpenBoo
     { href: '#facilities', label: t.navFacilities, id: 'facilities' },
     { href: '#self-check', label: t.navSelfCheck, id: 'self-check' },
     { href: '#approach', label: t.navApproach, id: 'approach' },
+    { href: '#stories', label: language === 'mr' ? 'यशोगाथा' : 'Stories', id: 'stories' },
     { href: '#faq', label: t.navFaq, id: 'faq' },
     { href: '#visit', label: t.navVisit, id: 'visit' },
   ];

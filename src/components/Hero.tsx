@@ -3,9 +3,12 @@ import {
   ArrowRight,
   Sparkles,
   Volume2,
+  Shield,
+  Award,
 } from 'lucide-react';
 import { Language } from '../types/clinic';
 import { TRANSLATIONS } from '../data/translations';
+import { useTilt3D } from '../hooks/useTilt3D';
 
 interface HeroProps {
   language: Language;
@@ -14,23 +17,37 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
   const t = TRANSLATIONS[language];
+  const centerTilt = useTilt3D<HTMLDivElement>({ maxTilt: 6, scale: 1.015 });
+  const leftCardTilt = useTilt3D<HTMLDivElement>({ maxTilt: 10, scale: 1.04 });
+  const rightCardTilt = useTilt3D<HTMLDivElement>({ maxTilt: 10, scale: 1.04 });
 
   return (
     <section
       id="home"
-      className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-[#fafaf7]"
+      className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-[#fafaf7] perspective-1000"
     >
-      {/* Soft ethereal ambient background glow matching the Mindly aesthetic */}
+      {/* 3D Volumetric Ambient Glow Spheres (Teal & Candlelight Gold) */}
       <div
-        className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] bg-gradient-to-b from-teal-100/35 via-gold-100/20 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"
+        className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[520px] bg-gradient-to-b from-teal-200/30 via-gold-200/20 to-transparent blur-3xl pointer-events-none -z-10 rounded-full animate-pulse-subtle"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-32 -left-32 w-96 h-96 bg-teal-800/10 rounded-full blur-3xl pointer-events-none -z-10"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-48 -right-32 w-96 h-96 bg-gold-400/15 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top Centered Section: Eyebrow, Editorial Typography, Subtitle & Action Buttons */}
         <div className="text-center max-w-3xl mx-auto space-y-5">
-          {/* Authentic Marathi Motto & Location Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-teal-900/10 bg-white/90 shadow-2xs backdrop-blur-sm transition-transform duration-300 hover:scale-102 anim-entrance-down" style={{ animationDelay: '80ms' }}>
+          {/* Authentic Marathi Motto & Location Badge with 3D Depth */}
+          <div
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-teal-900/10 bg-white/95 shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-102 hover:border-gold-400/60 anim-entrance-down"
+            style={{ animationDelay: '80ms' }}
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
@@ -45,18 +62,21 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
           </div>
 
           {/* Main Editorial Headline in Our Signature Theme Colors (Deep Teal & Warm Gold) */}
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-normal leading-[1.06] tracking-tight text-teal-brand text-balance anim-entrance-up" style={{ animationDelay: '180ms' }}>
+          <h1
+            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-normal leading-[1.06] tracking-tight text-teal-brand text-balance anim-entrance-up"
+            style={{ animationDelay: '180ms' }}
+          >
             {language === 'mr' ? (
               <>
-                <span>निरोगी मन</span><br />
-                <span className="italic font-normal font-serif text-gold-600">
+                <span className="drop-shadow-xs">निरोगी मन</span><br />
+                <span className="italic font-normal font-serif text-gold-600 gold-shimmer">
                   आनंदी जीवनासाठी.
                 </span>
               </>
             ) : (
               <>
-                <span>A Clearer Mind</span><br />
-                <span className="italic font-normal font-serif text-gold-600">
+                <span className="drop-shadow-xs">A Clearer Mind</span><br />
+                <span className="italic font-normal font-serif text-gold-600 gold-shimmer">
                   For A Brighter You.
                 </span>
               </>
@@ -64,17 +84,23 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
           </h1>
 
           {/* Centered Subtitle */}
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal anim-entrance-up" style={{ animationDelay: '280ms' }}>
+          <p
+            className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal anim-entrance-up"
+            style={{ animationDelay: '280ms' }}
+          >
             {language === 'mr'
               ? 'रुग्णाचे म्हणणे शांतपणे ऐकून घेणारे हक्काचे ठिकाण. डॉ. श्रद्धा (नितूरे) पत्रिके यांच्या मार्गदर्शनाखाली लातूर येथे उपलब्ध आधुनिक मानसोपचार, समुपदेशन व ईईजी मेंदू तपासणी सुविधा.'
               : 'UMED helps you find clarity, overcome anxiety and emotional distress, and rebuild peace — through unhurried psychiatric care and in-house neuro-diagnostics in Latur.'}
           </p>
 
-          {/* Centered Dual Action Buttons in Theme Palette */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 anim-entrance-up" style={{ animationDelay: '380ms' }}>
+          {/* Centered Dual Action Buttons in Theme Palette with 3D Depth */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 anim-entrance-up"
+            style={{ animationDelay: '380ms' }}
+          >
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-teal-brand hover:bg-teal-900 text-white font-medium text-xs sm:text-sm px-7 py-3.5 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 group btn-interactive"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-teal-brand hover:bg-teal-900 text-white font-medium text-xs sm:text-sm px-7 py-3.5 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5 group btn-interactive border border-white/20"
             >
               <span>{t.btnBookWhatsApp}</span>
               <ArrowRight
@@ -85,18 +111,37 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
 
             <a
               href="#care"
-              className="inline-flex items-center justify-center gap-2.5 rounded-full border border-slate-300/80 bg-white hover:bg-teal-50/50 text-teal-brand font-medium text-xs sm:text-sm px-6 py-3.5 shadow-2xs hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 btn-interactive"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full border border-slate-300/80 bg-white hover:bg-teal-50/50 text-teal-brand font-medium text-xs sm:text-sm px-6 py-3.5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 btn-interactive"
             >
-              <span className="h-5 w-5 rounded-full bg-teal-brand text-gold-400 flex items-center justify-center text-[9px] pl-0.5">
+              <span className="h-5 w-5 rounded-full bg-teal-brand text-gold-400 flex items-center justify-center text-[9px] pl-0.5 shadow-xs">
                 ▶
               </span>
               <span>{language === 'mr' ? 'आरोग्य सेवा पहा' : 'Explore Care Areas'}</span>
             </a>
           </div>
+
+          {/* 3 Micro Trust Signals directly below CTA */}
+          <div
+            className="pt-2 flex items-center justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs font-semibold text-slate-500 anim-entrance-up"
+            style={{ animationDelay: '440ms' }}
+          >
+            <span className="inline-flex items-center gap-1.5 text-teal-900">
+              <Shield size={14} className="text-emerald-600" />
+              <span>{language === 'mr' ? '१००% संपूर्ण गोपनीयता' : '100% Strict Patient Privacy'}</span>
+            </span>
+            <span className="h-3 w-px bg-slate-300" />
+            <span className="inline-flex items-center gap-1.5 text-teal-900">
+              <Award size={14} className="text-gold-600" />
+              <span>{language === 'mr' ? 'तज्ज्ञ मानसोपचार (MBBS, DPM)' : 'Consultant Psychiatrist (MBBS, DPM)'}</span>
+            </span>
+          </div>
         </div>
 
         {/* Central Visual Composition with 3D Orbiting Cards, Connecting Lines, and Social Proof */}
-        <div className="relative max-w-5xl mx-auto mt-10 sm:mt-14 pt-4 anim-entrance-scale" style={{ animationDelay: '480ms' }}>
+        <div
+          className="relative max-w-5xl mx-auto mt-10 sm:mt-14 pt-4 anim-entrance-scale"
+          style={{ animationDelay: '480ms' }}
+        >
           {/* Subtle Organic Curved Connecting Lines (Splines) */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-10"
@@ -120,14 +165,29 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             />
           </svg>
 
-          {/* Top Left Floating Card (Connected by Wire) */}
-          <div className="absolute top-4 left-0 sm:left-4 lg:left-6 z-20 animate-float hidden md:block">
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-lg border border-slate-200/90 max-w-[210px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
-              <div className="h-8 w-8 rounded-xl bg-teal-50 flex items-center justify-center text-teal-brand mb-3">
-                <Volume2 size={16} className="text-teal-brand" />
+          {/* Top Left Floating 3D Card (With Interactive Tilt and Audio Waves) */}
+          <div
+            ref={leftCardTilt.ref}
+            onMouseMove={leftCardTilt.onMouseMove}
+            onMouseLeave={leftCardTilt.onMouseLeave}
+            style={leftCardTilt.style}
+            className="absolute top-4 left-0 sm:left-4 lg:left-6 z-20 animate-float hidden md:block cursor-pointer"
+          >
+            <div className="glass-card-luxury rounded-2xl p-4 sm:p-5 shadow-xl border border-white/80 max-w-[210px] transition-all duration-300">
+              <div className="flex items-center justify-between mb-3">
+                <div className="h-8 w-8 rounded-xl bg-teal-50 flex items-center justify-center text-teal-brand shadow-xs">
+                  <Volume2 size={16} className="text-teal-brand" />
+                </div>
+                {/* Live subtle soundwave visualizer */}
+                <div className="flex items-center gap-0.5 h-4">
+                  <span className="w-0.5 bg-teal-500 rounded-full h-3 animate-pulse" />
+                  <span className="w-0.5 bg-gold-500 rounded-full h-4 animate-pulse" style={{ animationDelay: '150ms' }} />
+                  <span className="w-0.5 bg-teal-600 rounded-full h-2 animate-pulse" style={{ animationDelay: '300ms' }} />
+                  <span className="w-0.5 bg-gold-600 rounded-full h-3.5 animate-pulse" style={{ animationDelay: '75ms' }} />
+                </div>
               </div>
               <h3 className="font-bold text-xs sm:text-sm text-teal-brand leading-snug">
-                {language === 'mr' ? 'शांतपणे ऐकून घेणारे' : 'Turn Thoughts Into Progress.'}
+                {language === 'mr' ? 'शांतपणे ऐकून घेणारे' : 'Turn Thoughts Into Healing.'}
               </h3>
               <p className="mt-1 text-[11px] text-slate-500 leading-relaxed">
                 {language === 'mr'
@@ -137,7 +197,7 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Top Right Spinning Star Badge (Exact Match from Reference) */}
+          {/* Top Right Spinning Star Badge (Exact Match from Reference with Glowing Star) */}
           <div className="absolute top-0 right-2 sm:right-8 lg:right-16 z-20 hidden md:block">
             <div className="relative h-24 w-24 sm:h-28 sm:w-28 flex items-center justify-center animate-spin-slow">
               <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -153,32 +213,41 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
                 </text>
               </svg>
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <Sparkles size={18} className="text-gold-500" />
+                <div className="relative">
+                  <Sparkles size={18} className="text-gold-500 animate-pulse" />
+                  <div className="absolute inset-0 bg-gold-400 blur-sm opacity-50 rounded-full animate-ping" />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Floating Card Right (Positioned Lower so Spinning Badge Sits Nicely Above) */}
-          <div className="absolute top-32 right-0 sm:right-4 lg:right-6 z-20 animate-float-delayed hidden md:block">
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-lg border border-slate-200/90 max-w-[210px] transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          {/* Floating 3D Card Right (Positioned Lower so Spinning Badge Sits Nicely Above) */}
+          <div
+            ref={rightCardTilt.ref}
+            onMouseMove={rightCardTilt.onMouseMove}
+            onMouseLeave={rightCardTilt.onMouseLeave}
+            style={rightCardTilt.style}
+            className="absolute top-32 right-0 sm:right-4 lg:right-6 z-20 animate-float-delayed hidden md:block cursor-pointer"
+          >
+            <div className="glass-card-luxury rounded-2xl p-4 sm:p-5 shadow-xl border border-white/80 max-w-[210px] transition-all duration-300">
               {/* Avatar stack */}
               <div className="flex items-center mb-3">
                 <div className="flex -space-x-2">
                   <img
                     src="/images/doctor_image.jpeg"
                     alt="Dr. Shradha Patrike"
-                    className="h-7 w-7 rounded-full border-2 border-white object-cover"
+                    className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-xs"
                   />
-                  <div className="h-7 w-7 rounded-full bg-teal-brand text-white text-[9px] font-bold flex items-center justify-center border-2 border-white">
+                  <div className="h-7 w-7 rounded-full bg-teal-brand text-white text-[9px] font-bold flex items-center justify-center border-2 border-white shadow-xs">
                     SP
                   </div>
-                  <div className="h-7 w-7 rounded-full bg-gold-500 text-white text-[9px] font-bold flex items-center justify-center border-2 border-white">
+                  <div className="h-7 w-7 rounded-full bg-gold-500 text-white text-[9px] font-bold flex items-center justify-center border-2 border-white shadow-xs">
                     +
                   </div>
                 </div>
               </div>
               <h3 className="font-bold text-xs sm:text-sm text-teal-brand leading-snug">
-                {language === 'mr' ? 'विश्वासू रुग्णसेवा' : 'Ideas, Anytime, Anywhere.'}
+                {language === 'mr' ? 'विश्वासू रुग्णसेवा' : 'Care Anytime, Anywhere.'}
               </h3>
               <p className="mt-1 text-[11px] text-slate-500 leading-relaxed">
                 {language === 'mr'
@@ -188,41 +257,50 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Main Central Mind Portrait */}
-          <div className="relative mx-auto max-w-2xl px-4 flex justify-center">
-            <div className="relative overflow-hidden rounded-3xl w-full max-w-xl">
+          {/* Main Central Mind Portrait on 3D Pedestal */}
+          <div
+            ref={centerTilt.ref}
+            onMouseMove={centerTilt.onMouseMove}
+            onMouseLeave={centerTilt.onMouseLeave}
+            style={centerTilt.style}
+            className="relative mx-auto max-w-2xl px-4 flex justify-center cursor-pointer"
+          >
+            <div className="relative overflow-hidden rounded-3xl w-full max-w-xl group">
+              {/* Soft radial pedestal glow behind head */}
+              <div className="absolute inset-0 bg-radial from-teal-400/20 via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
+
               <img
                 src="/images/hero-mind-portrait.png"
                 alt="Mental Clarity and Healing at UMED Clinic"
-                className="w-full h-auto object-contain mx-auto transition-transform duration-700 ease-out hover:scale-102"
+                className="w-full h-auto object-contain mx-auto transition-transform duration-700 ease-out group-hover:scale-102"
               />
 
               {/* Seamless gradient fade at the bottom into the page */}
-              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#fafaf7] via-[#fafaf7]/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#fafaf7] via-[#fafaf7]/50 to-transparent pointer-events-none" />
             </div>
           </div>
 
           {/* Bottom Left Social Proof Stack */}
           <div className="absolute bottom-4 left-4 sm:left-10 lg:left-16 z-20 hidden md:block">
-            <div className="space-y-1.5">
-              <p className="text-[11px] font-medium text-slate-500">
+            <div className="space-y-1.5 p-3 rounded-2xl glass-card-luxury border border-white/80 shadow-md">
+              <p className="text-[11px] font-semibold text-slate-600">
                 {language === 'mr'
                   ? '५,०००+ समाधानी रुग्ण व कुटुंबे'
-                  : 'Trusted by 5,000+ patients & families.'}
+                  : 'Trusted by 5,000+ patients & families'}
               </p>
               <div className="flex items-center -space-x-2">
                 <img
                   src="/images/doctor_image.jpeg"
                   alt="Dr. Shradha Patrike"
-                  className="h-7 w-7 rounded-full border-2 border-white object-cover shadow-xs"
+                  className="h-6 w-6 rounded-full border-2 border-white object-cover shadow-xs"
                 />
-                <div className="h-7 w-7 rounded-full bg-teal-100 text-teal-800 text-[10px] font-bold flex items-center justify-center border-2 border-white">
+                <div className="h-6 w-6 rounded-full bg-teal-100 text-teal-800 text-[9px] font-bold flex items-center justify-center border-2 border-white">
                   SP
                 </div>
-                <div className="h-7 w-7 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold flex items-center justify-center border-2 border-white">
+                <div className="h-6 w-6 rounded-full bg-amber-100 text-amber-800 text-[9px] font-bold flex items-center justify-center border-2 border-white">
                   RK
                 </div>
-                <div className="h-7 w-7 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold flex items-center justify-center border-2 border-white">
+                <div className="h-6 w-6 rounded-full bg-slate-200 text-slate-700 text-[9px] font-bold flex items-center justify-center border-2 border-white">
                   +
                 </div>
               </div>
@@ -231,12 +309,12 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
 
           {/* Bottom Right Minimalist Sparkle (Moved inwards to avoid WhatsApp float overlap) */}
           <div className="absolute bottom-4 right-10 sm:right-16 lg:right-28 z-20 text-right hidden md:block">
-            <div className="space-y-0.5">
-              <Sparkles size={16} className="text-gold-500 ml-auto mb-1" />
-              <p className="text-xs font-semibold text-teal-brand">
+            <div className="space-y-0.5 p-3 rounded-2xl glass-card-luxury border border-white/80 shadow-md">
+              <Sparkles size={16} className="text-gold-500 ml-auto mb-1 animate-pulse" />
+              <p className="text-xs font-bold text-teal-brand">
                 {language === 'mr' ? 'कमी तणाव.' : 'Less chaos.'}
               </p>
-              <p className="text-xs font-semibold text-slate-500">
+              <p className="text-xs font-semibold text-gold-600">
                 {language === 'mr' ? 'अधिक मनःशांती.' : 'More clarity.'}
               </p>
             </div>
@@ -245,17 +323,17 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
 
         {/* Mobile-Friendly Feature Cards (Shown on mobile screens below the center image) */}
         <div className="mt-8 grid grid-cols-2 gap-3 md:hidden">
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-slate-200/80">
             <Volume2 size={18} className="text-teal-brand mb-2" />
             <h3 className="font-bold text-xs text-teal-brand">
-              {language === 'mr' ? 'शांत सल्ला' : 'Turn Thoughts Into Progress.'}
+              {language === 'mr' ? 'शांत सल्ला' : 'Turn Thoughts Into Healing.'}
             </h3>
             <p className="text-[10px] text-slate-500 mt-1">
               {language === 'mr' ? 'गोपनीय मानसोपचार.' : 'Private psychiatric care.'}
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-slate-200/80">
             <Sparkles size={18} className="text-gold-500 mb-2" />
             <h3 className="font-bold text-xs text-teal-brand">
               {language === 'mr' ? 'अधिक मनःशांती' : 'Less Chaos. More Clarity.'}
