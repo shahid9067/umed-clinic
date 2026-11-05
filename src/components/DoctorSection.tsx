@@ -138,7 +138,7 @@ export const DoctorSection: React.FC<DoctorSectionProps> = ({ language, onOpenBo
               <p className="text-xs font-bold uppercase tracking-widest text-gold-700">
                 {language === 'mr' ? 'डॉक्टरांचे मत' : 'Doctor’s Reflection'}
               </p>
-              <p className="font-display italic text-sm sm:text-base text-teal-900 leading-relaxed">
+              <p className="font-serif italic text-sm sm:text-base text-teal-900 leading-relaxed">
                 {language === 'mr'
                   ? '“मानसिक स्वास्थ्यासाठी वैद्यकीय सल्ला घेणे हा दुर्बलतेचा नाही, तर स्वतःच्या आणि कुटुंबाच्या भवितव्यासाठी घेतलेला सर्वात धाडसी निर्णय असतो.”'
                   : '“Reaching out for mental health support is not a sign of defeat — it is the single most courageous decision you can make for your emotional freedom and your family’s peace.”'}

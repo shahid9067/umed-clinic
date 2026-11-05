@@ -86,9 +86,9 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ language }) =>
       subtitleEn: 'Zero Medical Jargon',
       subtitleMr: 'कोणत्याही संकोचाची गरज नाही',
       descEn:
-        'You do not need to prepare a formal explanation or worry about how to describe your pain. We begin with what feels comfortable for you to share, in a strictly private and warm room.',
+        'No medical preparation needed. Share your concerns at your own pace in a completely confidential, supportive space.',
       descMr:
-        'मनातील भीती, अस्वस्थता किंवा भावना व्यक्त करण्यासाठी कोणत्याही अवघड शब्दांची गरज नसते. अगदी शांतपणे व मोकळेपणाने तुमचे म्हणणे ऐकून घेतले जाते.',
+        'कोणत्याही संकोचाशिवाय अगदी शांतपणे व मोकळेपणाने तुमचे म्हणणे सांगा; आम्ही ऐकून घेण्यासाठी येथे आहोत.',
       guaranteeEn: '100% Confidential Listening',
       guaranteeMr: '१००% खाजगी व शांत संवाद',
     },
@@ -100,9 +100,9 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ language }) =>
       subtitleEn: 'Transparent Clinical Clarity',
       subtitleMr: 'पारदर्शक वैद्यकीय दृष्टिकोन',
       descEn:
-        'Dr. Shradha carefully evaluates neurological, psychological, and lifestyle factors. If EEG or lab tests are indicated, every step is explained clearly so you remain an empowered partner in your care.',
+        'Dr. Shradha transparently explains diagnostics and care options, making you an informed, respected partner in your recovery.',
       descMr:
-        'मेंदूतील रासायनिक बदल, मानसिक ताण आणि जीवनशैलीचा अभ्यास करून योग्य निदान केले जाते. चाचण्या किंवा औषधांमागील कारणे रुग्णाला स्पष्टपणे समजावून सांगितली जातात.',
+        'तपासणी, निदान व उपचारांमागील शास्त्रीय कारणे रुग्णाला व कुटुंबाला अगदी स्पष्टपणे समजावून सांगितली जातात.',
       guaranteeEn: 'Clear Diagnostic Rationale',
       guaranteeMr: 'अचूक व शास्त्रीय स्पष्टता',
     },
@@ -114,9 +114,9 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ language }) =>
       subtitleEn: 'Sustainable Recovery Roadmap',
       subtitleMr: 'दीर्घकालीन मानसिक स्वास्थ्य',
       descEn:
-        'Progress in mental health is a process of steady restoration. Through structured follow-ups, gradual medicine tapering, and family counseling, we help you regain confidence and joyful living.',
+        'Steady restoration through structured follow-ups, lifestyle adaptations, and monitored medicine tapering.',
       descMr:
-        'मानसोपचार हा तात्पुरता नसून शाश्वत सुधारणेचा मार्ग आहे. नियमित पाठपुरावा, समुपदेशन आणि वेळेवर औषध कमी करत रुग्णाला पुन्हा स्वतंत्र व आनंदी जीवन जगता येते.',
+        'नियमित पाठपुरावा, समुपदेशन आणि टप्प्याटप्प्याने औषध कमी करत रुग्णाला पुन्हा आनंदी जीवन मिळवून देणे.',
       guaranteeEn: 'Gradual Tapering Pathway',
       guaranteeMr: 'टप्प्याटप्प्याने औषधमुक्ती',
     },

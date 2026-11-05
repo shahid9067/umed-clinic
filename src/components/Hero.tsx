@@ -145,8 +145,8 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             style={{ animationDelay: '280ms' }}
           >
             {language === 'mr'
-              ? 'रुग्णाचे म्हणणे शांतपणे ऐकून घेणारे हक्काचे ठिकाण. डॉ. श्रद्धा (नितूरे) पत्रिके यांच्या मार्गदर्शनाखाली लातूर येथे उपलब्ध आधुनिक मानसोपचार, समुपदेशन व ईईजी मेंदू तपासणी सुविधा.'
-              : 'UMED helps you find clarity, overcome anxiety and emotional distress, and rebuild peace — through unhurried psychiatric care and in-house neuro-diagnostics in Latur.'}
+              ? 'लातूर येथील विश्वासार्ह मानसोपचार केंद्र. डॉ. श्रद्धा पत्रिके यांच्या मार्गदर्शनाखाली संपूर्ण गोपनीय, शास्त्रीय उपचार व ईईजी मेंदू तपासणी.'
+              : 'Compassionate, unhurried psychiatric care and in-house neuro-diagnostics in Latur — guiding you towards lasting emotional peace.'}
           </p>
 
           {/* Centered Dual Action Buttons in Theme Palette with 3D Depth */}

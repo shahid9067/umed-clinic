@@ -10,7 +10,6 @@ import { CareSection } from './components/CareSection';
 import { FacilitiesSection } from './components/FacilitiesSection';
 import { SelfCheckSection } from './components/SelfCheckSection';
 import { ApproachSection } from './components/ApproachSection';
-import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
 import { VisitSection } from './components/VisitSection';
 import { CrisisNotice } from './components/CrisisNotice';
@@ -93,7 +92,6 @@ export function App() {
         <FacilitiesSection language={language} />
         <SelfCheckSection language={language} onOpenBooking={handleOpenBooking} />
         <ApproachSection language={language} />
-        <TestimonialsSection language={language} onOpenBooking={() => handleOpenBooking()} />
         <FaqSection language={language} onOpenBooking={() => handleOpenBooking()} />
         <VisitSection language={language} onOpenBooking={() => handleOpenBooking()} />
       </main>
