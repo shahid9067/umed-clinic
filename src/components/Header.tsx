@@ -65,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, onOpenBoo
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-4 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-4 transition-all duration-300 anim-entrance-down">
       <div className="mx-auto max-w-7xl relative">
         <div
           className={`rounded-full border transition-all duration-300 ${

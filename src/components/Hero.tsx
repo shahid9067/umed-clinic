@@ -28,9 +28,9 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top Centered Section: Eyebrow, Editorial Typography, Subtitle & Action Buttons */}
-        <div className="text-center max-w-3xl mx-auto space-y-5 animate-hero-enter">
+        <div className="text-center max-w-3xl mx-auto space-y-5">
           {/* Authentic Marathi Motto & Location Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-teal-900/10 bg-white/90 shadow-2xs backdrop-blur-sm transition-transform duration-300 hover:scale-102">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-teal-900/10 bg-white/90 shadow-2xs backdrop-blur-sm transition-transform duration-300 hover:scale-102 anim-entrance-down" style={{ animationDelay: '80ms' }}>
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
@@ -45,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
           </div>
 
           {/* Main Editorial Headline in Our Signature Theme Colors (Deep Teal & Warm Gold) */}
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-normal leading-[1.06] tracking-tight text-teal-brand text-balance">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-normal leading-[1.06] tracking-tight text-teal-brand text-balance anim-entrance-up" style={{ animationDelay: '180ms' }}>
             {language === 'mr' ? (
               <>
                 <span>निरोगी मन</span><br />
@@ -64,14 +64,14 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
           </h1>
 
           {/* Centered Subtitle */}
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal anim-entrance-up" style={{ animationDelay: '280ms' }}>
             {language === 'mr'
               ? 'रुग्णाचे म्हणणे शांतपणे ऐकून घेणारे हक्काचे ठिकाण. डॉ. श्रद्धा (नितूरे) पत्रिके यांच्या मार्गदर्शनाखाली लातूर येथे उपलब्ध आधुनिक मानसोपचार, समुपदेशन व ईईजी मेंदू तपासणी सुविधा.'
               : 'UMED helps you find clarity, overcome anxiety and emotional distress, and rebuild peace — through unhurried psychiatric care and in-house neuro-diagnostics in Latur.'}
           </p>
 
           {/* Centered Dual Action Buttons in Theme Palette */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 anim-entrance-up" style={{ animationDelay: '380ms' }}>
             <button
               onClick={onOpenBooking}
               className="inline-flex items-center justify-center gap-2.5 rounded-full bg-teal-brand hover:bg-teal-900 text-white font-medium text-xs sm:text-sm px-7 py-3.5 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 group btn-interactive"
@@ -96,7 +96,7 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
         </div>
 
         {/* Central Visual Composition with 3D Orbiting Cards, Connecting Lines, and Social Proof */}
-        <div className="relative max-w-5xl mx-auto mt-10 sm:mt-14 pt-4">
+        <div className="relative max-w-5xl mx-auto mt-10 sm:mt-14 pt-4 anim-entrance-scale" style={{ animationDelay: '480ms' }}>
           {/* Subtle Organic Curved Connecting Lines (Splines) */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-10"

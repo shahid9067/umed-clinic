@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Language, CareItem } from './types/clinic';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { Header } from './components/Header';
@@ -20,10 +20,23 @@ import { CareDetailModal } from './components/CareDetailModal';
 
 export function App() {
   useScrollReveal();
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [language, setLanguage] = useState<Language>('en');
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedBookingService, setSelectedBookingService] = useState<string | undefined>(undefined);
   const [selectedCareDetail, setSelectedCareDetail] = useState<CareItem | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (windowHeight > 0) {
+        setScrollProgress((totalScroll / windowHeight) * 100);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleOpenBooking = (serviceId?: string) => {
     setSelectedBookingService(serviceId);
@@ -50,7 +63,14 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fafaf7] text-[#102a2d] antialiased">
+    <div className="min-h-screen flex flex-col bg-[#fafaf7] text-[#102a2d] antialiased selection:bg-gold-200 selection:text-teal-900">
+      {/* Luxury Scroll Reading Progress Indicator */}
+      <div
+        className="fixed top-0 left-0 h-[2.5px] bg-gradient-to-r from-teal-brand via-gold-500 to-gold-400 z-[60] pointer-events-none transition-all duration-75"
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden="true"
+      />
+
       {/* Navigation Header */}
       <Header
         language={language}

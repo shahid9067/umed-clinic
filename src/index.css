@@ -11,9 +11,14 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  section[id] {
+    scroll-margin-top: 100px;
   }
 
   body {
@@ -42,7 +47,7 @@
   }
 
   .glass-panel {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(15, 61, 67, 0.08);
@@ -72,24 +77,83 @@
 
   /* Interactive smooth button with hover float and tactile press */
   .btn-interactive {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
     will-change: transform;
   }
   .btn-interactive:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2.5px);
   }
   .btn-interactive:active {
     transform: translateY(0) scale(0.97);
   }
 }
 
-/* Animations & Keyframes */
+/* ==========================================================
+   PAGE ENTRANCE ANIMATIONS (Triggered on site visit)
+   ========================================================== */
+@keyframes entrance-fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entrance-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entrance-scale-up {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.anim-entrance-down {
+  animation: entrance-fade-down 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-entrance-up {
+  animation: entrance-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-entrance-scale {
+  animation: entrance-scale-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ==========================================================
+   CONTINUOUS IDLE & MOTION EFFECTS
+   ========================================================== */
 @keyframes float-smooth {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px) rotate(0.6deg);
+    transform: translateY(-9px) rotate(0.4deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -107,7 +171,7 @@
 
 @keyframes gold-breathe {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(184, 142, 56, 0.3);
+    box-shadow: 0 0 0 0 rgba(184, 142, 56, 0.25);
   }
   50% {
     box-shadow: 0 0 20px 4px rgba(184, 142, 56, 0.2);
@@ -125,36 +189,16 @@
   }
 }
 
-@keyframes hero-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 22s linear infinite;
+.animate-float {
+  animation: float-smooth 6.5s ease-in-out infinite;
 }
 
 .animate-float-delayed {
   animation: float-smooth 7s ease-in-out 1.5s infinite;
 }
 
-.animate-float {
-  animation: float-smooth 6.5s ease-in-out infinite;
+.animate-spin-slow {
+  animation: spin-slow 22s linear infinite;
 }
 
 .animate-pulse-ring {
@@ -169,30 +213,28 @@
   animation: slide-down-fade 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-hero-enter {
-  animation: hero-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Motion & Animations */
+/* ==========================================================
+   SCROLL REVEAL SYSTEM (Silky smooth glide & fade-in)
+   ========================================================== */
 .reveal-on-scroll {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* Enhanced 3D card tilt and hover motion */
-.card-premium {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
+/* Activated once JS is ready, safely hidden until scrolled into view */
+.reveal-ready .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
 }
 
-.card-premium:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 35px -8px rgba(15, 61, 67, 0.15), 0 8px 16px -4px rgba(15, 61, 67, 0.08);
+.reveal-ready .reveal-on-scroll.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
-/* Stagger Delays */
+/* Stagger Delays for Grid Elements */
 .delay-75 { transition-delay: 75ms; }
 .delay-100 { transition-delay: 100ms; }
 .delay-150 { transition-delay: 150ms; }
@@ -200,6 +242,7 @@
 .delay-250 { transition-delay: 250ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -227,7 +270,7 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .js-reveal .reveal-on-scroll {
+  .reveal-ready .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
   }

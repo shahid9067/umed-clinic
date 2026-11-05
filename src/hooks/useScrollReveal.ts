@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 
 export function useScrollReveal() {
   useEffect(() => {
-    document.documentElement.classList.add('js-reveal');
-
+    // Check reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
@@ -12,10 +11,15 @@ export function useScrollReveal() {
       return;
     }
 
+    // Mark as reveal-ready so CSS activates the initial opacity: 0 and translateY
+    document.documentElement.classList.add('reveal-ready');
+
+    const revealElement = (el: Element) => {
+      el.classList.add('is-revealed');
+    };
+
     const revealAll = () => {
-      document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-        el.classList.add('is-revealed');
-      });
+      document.querySelectorAll('.reveal-on-scroll').forEach(revealElement);
     };
 
     if (typeof IntersectionObserver !== 'undefined') {
@@ -23,36 +27,49 @@ export function useScrollReveal() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
+              revealElement(entry.target);
               observer.unobserve(entry.target);
             }
           });
         },
         {
-          rootMargin: '120px 0px 120px 0px',
-          threshold: 0.05,
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.1,
         }
       );
 
-      document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-        observer.observe(el);
-      });
-
-      // Also reveal anything currently in viewport
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      document.querySelectorAll('.reveal-on-scroll:not(.is-revealed)').forEach((el) => {
+      const elements = document.querySelectorAll('.reveal-on-scroll');
+      elements.forEach((el) => {
+        // If element is already in the viewport upon mount, reveal it immediately
         const rect = el.getBoundingClientRect();
-        if (rect.top < windowHeight * 1.2) {
-          el.classList.add('is-revealed');
+        if (rect.top <= (window.innerHeight || document.documentElement.clientHeight)) {
+          revealElement(el);
+        } else {
+          observer.observe(el);
         }
       });
 
-      // Safety timeout: never leave content permanently hidden
-      const timer = setTimeout(revealAll, 1200);
+      // Passive scroll listener for fast wheel scrolling
+      const handleScroll = () => {
+        const threshold = window.innerHeight * 0.95;
+        document.querySelectorAll('.reveal-on-scroll:not(.is-revealed)').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= threshold) {
+            revealElement(el);
+            observer.unobserve(el);
+          }
+        });
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // Safety timeout: ensure everything is visible after 2s regardless of scroll
+      const safetyTimer = setTimeout(revealAll, 2000);
 
       return () => {
         observer.disconnect();
-        clearTimeout(timer);
+        window.removeEventListener('scroll', handleScroll);
+        clearTimeout(safetyTimer);
       };
     } else {
       revealAll();
