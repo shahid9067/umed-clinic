@@ -9,6 +9,7 @@ import {
 import { Language } from '../types/clinic';
 import { TRANSLATIONS } from '../data/translations';
 import { useTilt3D } from '../hooks/useTilt3D';
+import { useCountUp } from '../hooks/useCountUp';
 
 interface HeroProps {
   language: Language;
@@ -20,6 +21,13 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
   const centerTilt = useTilt3D<HTMLDivElement>({ maxTilt: 6, scale: 1.015 });
   const leftCardTilt = useTilt3D<HTMLDivElement>({ maxTilt: 10, scale: 1.04 });
   const rightCardTilt = useTilt3D<HTMLDivElement>({ maxTilt: 10, scale: 1.04 });
+
+  // Counting animation for hero page numbers
+  const { ref: heroStatRef, value: heroPatientCount } = useCountUp({
+    end: 5000,
+    suffix: '+',
+    duration: 2200,
+  });
 
   return (
     <section
@@ -69,57 +77,23 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             {language === 'mr' ? (
               <>
                 <span className="drop-shadow-xs">निरोगी मन</span><br />
-                <span className="relative inline-block italic font-normal font-serif text-gold-600 gold-shimmer pb-1">
+                <span className="relative inline-block italic font-normal font-serif text-gold-600 pb-1">
                   आनंदी जीवनासाठी.
-                  <svg
-                    className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 pointer-events-none overflow-visible"
-                    viewBox="0 0 250 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3 10C50 3 130 2 247 9C180 4 90 6 22 12"
-                      stroke="url(#underline-gold-gradient-mr)"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      className="animate-draw-underline"
-                    />
-                    <defs>
-                      <linearGradient id="underline-gold-gradient-mr" x1="0" y1="0" x2="250" y2="0" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#9e732c" />
-                        <stop offset="0.5" stopColor="#dfc476" />
-                        <stop offset="1" stopColor="#b88e38" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                  <span
+                    className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-1 sm:h-1.5 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 rounded-full underline-left-to-right pointer-events-none shadow-xs"
+                    aria-hidden="true"
+                  />
                 </span>
               </>
             ) : (
               <>
                 <span className="drop-shadow-xs">A Clearer Mind</span><br />
-                <span className="relative inline-block italic font-normal font-serif text-gold-600 gold-shimmer pb-1">
+                <span className="relative inline-block italic font-normal font-serif text-gold-600 pb-1">
                   For A Brighter You.
-                  <svg
-                    className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 pointer-events-none overflow-visible"
-                    viewBox="0 0 250 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3 10C50 3 130 2 247 9C180 4 90 6 22 12"
-                      stroke="url(#underline-gold-gradient-en)"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      className="animate-draw-underline"
-                    />
-                    <defs>
-                      <linearGradient id="underline-gold-gradient-en" x1="0" y1="0" x2="250" y2="0" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#9e732c" />
-                        <stop offset="0.5" stopColor="#dfc476" />
-                        <stop offset="1" stopColor="#b88e38" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                  <span
+                    className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-1 sm:h-1.5 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 rounded-full underline-left-to-right pointer-events-none shadow-xs"
+                    aria-hidden="true"
+                  />
                 </span>
               </>
             )}
@@ -322,13 +296,13 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Bottom Left Social Proof Stack */}
+          {/* Bottom Left Social Proof Stack with Counting Animation */}
           <div className="absolute bottom-4 left-4 sm:left-10 lg:left-16 z-20 hidden md:block">
-            <div className="space-y-1.5 p-3 rounded-2xl glass-card-luxury border border-white/80 shadow-md">
-              <p className="text-[11px] font-semibold text-slate-600">
+            <div ref={heroStatRef} className="space-y-1.5 p-3 rounded-2xl glass-card-luxury border border-white/80 shadow-md">
+              <p className="text-[11px] font-semibold text-slate-700">
                 {language === 'mr'
-                  ? '५,०००+ समाधानी रुग्ण व कुटुंबे'
-                  : 'Trusted by 5,000+ patients & families'}
+                  ? `${heroPatientCount} समाधानी रुग्ण व कुटुंबे`
+                  : `Trusted by ${heroPatientCount} patients & families`}
               </p>
               <div className="flex items-center -space-x-2">
                 <img

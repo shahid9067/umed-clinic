@@ -9,14 +9,11 @@ import {
   ArrowUpRight,
   ShieldCheck,
   Heart,
-  ChevronLeft,
-  ChevronRight,
   CheckCircle2,
 } from 'lucide-react';
 import { Language } from '../types/clinic';
 import { TRANSLATIONS } from '../data/translations';
 import { useTilt3D } from '../hooks/useTilt3D';
-import { useCountUp } from '../hooks/useCountUp';
 
 interface AboutSectionProps {
   language: Language;
@@ -31,96 +28,49 @@ interface ArcSlideItem {
   tagMr: string;
 }
 
+// 5 Brand New, High-Resolution Mental Wellness & Lifestyle Photos (Matching Reference Image 1)
 const ARC_SLIDES: ArcSlideItem[] = [
   {
-    id: 'mindfulness',
-    image: '/images/care/care-anxiety.jpg',
-    altEn: 'Mindfulness, calm mind, and inner peace',
-    altMr: 'शांत मन आणि तणावमुक्ती',
-    tagEn: 'Emotional Peace',
-    tagMr: 'भावनिक शांती',
+    id: 'peaceful-meditation',
+    image: '/images/arc-calm-meditation.jpg',
+    altEn: 'Calm mindfulness and inner peace',
+    altMr: 'शांत मन आणि ध्यानधारणा',
+    tagEn: 'Inner Peace',
+    tagMr: 'मनाची शांतता',
   },
   {
-    id: 'listening',
-    image: '/images/about-listening.jpg',
-    altEn: 'Unhurried private psychiatric consultation',
-    altMr: 'शांतपणे ऐकून घेणारे खाजगी समुपदेशन',
-    tagEn: 'Unhurried Presence',
-    tagMr: 'सविस्तर संवाद',
+    id: 'freedom-joy',
+    image: '/images/arc-freedom-joy.jpg',
+    altEn: 'Freedom from anxiety and joyful living',
+    altMr: 'चिंतामुक्ती आणि जगण्याचा आनंद',
+    tagEn: 'Emotional Freedom',
+    tagMr: 'तणावमुक्ती',
   },
   {
-    id: 'student',
-    image: '/images/care/care-student.jpg',
-    altEn: 'Student focus, confidence, and optimism',
-    altMr: 'विद्यार्थी एकाग्रता व आत्मविश्वास',
-    tagEn: 'Clarity & Focus',
-    tagMr: 'एकाग्रता व आत्मविश्वास',
+    id: 'confident-smile',
+    image: '/images/arc-confident-smile.jpg',
+    altEn: 'Confident radiant smile and restored vitality',
+    altMr: 'पुनर्प्राप्त आत्मविश्वास आणि आनंद',
+    tagEn: 'Confidence',
+    tagMr: 'आत्मविश्वास',
   },
   {
-    id: 'recovery',
-    image: '/images/facility-ipd.jpg',
-    altEn: 'Comfortable, serene inpatient recovery ward',
-    altMr: 'शांत व सुरक्षित अंतररुग्ण विभाग',
-    tagEn: 'Dignified Healing',
-    tagMr: 'सन्मानपूर्वक उपचार',
+    id: 'refreshed-walk',
+    image: '/images/arc-refreshed-walk.jpg',
+    altEn: 'Refreshed active wellness and clarity',
+    altMr: 'सकारात्मक ऊर्जा व नवा उत्साह',
+    tagEn: 'Daily Vitality',
+    tagMr: 'नवा उत्साह',
   },
   {
-    id: 'diagnostics',
-    image: '/images/facility-eeg.jpg',
-    altEn: 'In-house digital 32-channel EEG brainwave testing',
-    altMr: 'मेंदूच्या लहरींचे अचूक ईईजी निदान',
-    tagEn: 'Neuro-Diagnostics',
-    tagMr: 'अचूक ब्रेन मॅपिंग',
-  },
-  {
-    id: 'general',
-    image: '/images/care/care-general.jpg',
-    altEn: 'Compassionate family guidance & medical care',
-    altMr: 'कुटुंब सहकार्य व मानसिक आरोग्य',
-    tagEn: 'Family Partnership',
-    tagMr: 'कुटुंब सहकार्य',
+    id: 'peaceful-nature',
+    image: '/images/arc-peaceful-nature.jpg',
+    altEn: 'Serene nature and mindful calm',
+    altMr: 'निसर्गाच्या सान्निध्यात मनःशांती',
+    tagEn: 'Clarity of Mind',
+    tagMr: 'विचारांची स्पष्टता',
   },
 ];
-
-// Single animated stat block with count-up hook
-const AnimatedStatItem: React.FC<{
-  end: number;
-  suffix?: string;
-  prefix?: string;
-  decimals?: number;
-  labelEn: string;
-  labelMr: string;
-  subEn: string;
-  subMr: string;
-  language: Language;
-}> = ({ end, suffix = '', prefix = '', decimals = 0, labelEn, labelMr, subEn, subMr, language }) => {
-  const { ref, value } = useCountUp({
-    end,
-    duration: 2200,
-    decimals,
-    suffix,
-    prefix,
-  });
-
-  return (
-    <div
-      ref={ref}
-      className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-soft hover:shadow-md transition-all duration-300 text-center flex flex-col justify-between group hover:-translate-y-1"
-    >
-      <div>
-        <p className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-brand tracking-tight group-hover:text-gold-600 transition-colors">
-          {value}
-        </p>
-        <p className="mt-2 text-xs sm:text-sm font-bold text-slate-800">
-          {language === 'mr' ? labelMr : labelEn}
-        </p>
-      </div>
-      <p className="mt-1 text-[11px] text-slate-500 font-medium">
-        {language === 'mr' ? subMr : subEn}
-      </p>
-    </div>
-  );
-};
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
   const t = TRANSLATIONS[language];
@@ -129,27 +79,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
   const cardTilt3 = useTilt3D(6);
   const cardTilt4 = useTilt3D(6);
 
-  // Slide state for the curved arc carousel
-  const [activeSlide, setActiveSlide] = useState(2); // center card active
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  // Active center card for the smooth sliding arc transition
+  const [activeSlideIndex, setActiveSlideIndex] = useState(2); // Center card (Confidence) is focal
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % ARC_SLIDES.length);
-    }, 3800);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const handlePrevSlide = () => {
-    setIsAutoPlaying(false);
-    setActiveSlide((prev) => (prev === 0 ? ARC_SLIDES.length - 1 : prev - 1));
-  };
-
-  const handleNextSlide = () => {
-    setIsAutoPlaying(false);
-    setActiveSlide((prev) => (prev + 1) % ARC_SLIDES.length);
-  };
+    const timer = setInterval(() => {
+      setActiveSlideIndex((prev) => (prev + 1) % ARC_SLIDES.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section
@@ -157,46 +95,47 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
       className="py-20 lg:py-28 bg-[#f5f8f6] relative overflow-hidden scroll-mt-24 sm:scroll-mt-28"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-teal-800/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-teal-800/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* ==========================================================
-            GRAND SEMI-CIRCULAR ARC DIAL SHOWCASE (Matching Reference)
+            GRAND SEMI-CIRCULAR ARC DIAL SHOWCASE (Exact Match to Reference)
             ========================================================== */}
-        <div className="relative pt-6 pb-12 sm:pb-16 text-center max-w-5xl mx-auto reveal-on-scroll">
-          {/* Radial Arc Track with Graduation Dial Marks */}
-          <div className="relative mx-auto w-full max-w-4xl h-[280px] sm:h-[340px] md:h-[390px] flex items-end justify-center overflow-visible">
-            {/* SVG Precision Semi-Circular Dial Line & Radial Ticks */}
+        <div className="relative pt-4 pb-14 text-center max-w-5xl mx-auto reveal-on-scroll">
+          {/* Radial Arc Dial Geometry */}
+          <div className="relative mx-auto w-full max-w-5xl h-[310px] sm:h-[380px] lg:h-[420px] flex items-end justify-center overflow-visible">
+            {/* SVG Precision Dial Arch with Radial Tick Marks */}
             <svg
-              className="absolute inset-x-0 bottom-0 w-full h-[260px] sm:h-[320px] md:h-[370px] pointer-events-none overflow-visible"
-              viewBox="0 0 900 450"
+              className="absolute inset-x-0 bottom-0 w-full h-[280px] sm:h-[350px] lg:h-[390px] pointer-events-none overflow-visible"
+              viewBox="0 0 1000 500"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Outer faint glow arc */}
+              {/* Outer faint dashed glow arc */}
               <path
-                d="M 50 440 A 400 400 0 0 1 850 440"
-                stroke="rgba(184, 142, 56, 0.25)"
+                d="M 60 480 A 440 440 0 0 1 940 480"
+                stroke="rgba(184, 142, 56, 0.28)"
                 strokeWidth="1.5"
-                strokeDasharray="4 4"
+                strokeDasharray="4 6"
               />
 
-              {/* Main solid precision guide arc */}
+              {/* Main solid precision dial arc */}
               <path
-                d="M 90 440 A 360 360 0 0 1 810 440"
-                stroke="rgba(15, 61, 67, 0.2)"
+                d="M 110 480 A 390 390 0 0 1 890 480"
+                stroke="rgba(15, 61, 67, 0.18)"
                 strokeWidth="2"
               />
 
-              {/* Radial tick marks along the arc circumference */}
-              {Array.from({ length: 65 }).map((_, i) => {
-                const angle = 180 + (i / 64) * 180;
+              {/* Radial graduation tick marks along circumference */}
+              {Array.from({ length: 73 }).map((_, i) => {
+                const angle = 180 + (i / 72) * 180;
                 const rad = (angle * Math.PI) / 180;
-                const cx = 450;
-                const cy = 440;
-                const rInner = i % 5 === 0 ? 342 : 352;
-                const rOuter = 368;
+                const cx = 500;
+                const cy = 480;
+                const isMajor = i % 6 === 0;
+                const rInner = isMajor ? 370 : 382;
+                const rOuter = 400;
                 const x1 = cx + rInner * Math.cos(rad);
                 const y1 = cy + rInner * Math.sin(rad);
                 const x2 = cx + rOuter * Math.cos(rad);
@@ -209,67 +148,59 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke={i % 5 === 0 ? 'rgba(184, 142, 56, 0.7)' : 'rgba(15, 61, 67, 0.25)'}
-                    strokeWidth={i % 5 === 0 ? '2' : '1'}
+                    stroke={isMajor ? 'rgba(184, 142, 56, 0.75)' : 'rgba(15, 61, 67, 0.2)'}
+                    strokeWidth={isMajor ? '2' : '1'}
                   />
                 );
               })}
             </svg>
 
-            {/* Radial Cards Arched along the Perimeter (Slide / Rotation Animation) */}
-            <div className="absolute top-0 inset-x-0 h-full flex items-center justify-center pointer-events-none">
+            {/* Desktop / Tablet Fanned Arc of 5 Cards (Exact Match from Reference Image) */}
+            <div className="hidden md:flex absolute top-0 inset-x-0 h-full items-center justify-center pointer-events-none">
               <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
                 {ARC_SLIDES.map((slide, idx) => {
-                  // Calculate relative offset from active slide
-                  const offset = (idx - activeSlide + ARC_SLIDES.length) % ARC_SLIDES.length;
-                  // Map to centered index: -2, -1, 0, 1, 2
-                  const signedOffset = offset > ARC_SLIDES.length / 2 ? offset - ARC_SLIDES.length : offset;
+                  // Pre-calibrated angles and positions for a clean, non-overlapping semicircle fan
+                  const angles = [-26, -13, 0, 13, 26];
+                  const xPositions = [-300, -150, 0, 150, 300];
+                  const yPositions = [36, 10, 0, 10, 36];
 
-                  // Visible range: -2 to +2
-                  const isVisible = Math.abs(signedOffset) <= 2;
-                  if (!isVisible) return null;
-
-                  // Distinct angular and translation offsets along the semicircle
-                  const rotationAngle = signedOffset * 17; // -34deg, -17deg, 0deg, +17deg, +34deg
-                  const xTranslate = signedOffset * 155; // pixels spread
-                  const yTranslate = Math.abs(signedOffset) * 22; // curve downward on sides
-                  const scale = signedOffset === 0 ? 1.08 : 0.94 - Math.abs(signedOffset) * 0.05;
-                  const zIndex = 20 - Math.abs(signedOffset) * 2;
-                  const opacity = signedOffset === 0 ? 1 : 0.88 - Math.abs(signedOffset) * 0.15;
+                  const angle = angles[idx];
+                  const x = xPositions[idx];
+                  const y = yPositions[idx];
+                  const isFocal = idx === activeSlideIndex;
 
                   return (
                     <div
                       key={slide.id}
-                      onClick={() => {
-                        setIsAutoPlaying(false);
-                        setActiveSlide(idx);
-                      }}
+                      onClick={() => setActiveSlideIndex(idx)}
                       className="absolute pointer-events-auto cursor-pointer transition-all duration-700 ease-out group"
                       style={{
-                        transform: `translateX(${xTranslate}px) translateY(${yTranslate}px) rotate(${rotationAngle}deg) scale(${scale})`,
-                        zIndex,
-                        opacity,
-                        transformOrigin: 'center 280px',
+                        transform: `translateX(${x}px) translateY(${y}px) rotate(${angle}deg) ${
+                          isFocal ? 'scale(1.08)' : 'scale(0.96)'
+                        }`,
+                        zIndex: isFocal ? 30 : 20 - Math.abs(idx - 2),
+                        transformOrigin: 'center 320px',
                       }}
                     >
                       <div
-                        className={`w-28 sm:w-36 md:w-44 h-40 sm:h-52 md:h-60 rounded-2xl sm:rounded-3xl overflow-hidden p-1 bg-white border-2 transition-all duration-300 shadow-xl ${
-                          signedOffset === 0
-                            ? 'border-gold-400 ring-4 ring-gold-400/20 shadow-2xl'
-                            : 'border-white/80 hover:border-gold-300'
+                        className={`w-36 sm:w-40 lg:w-44 h-52 sm:h-56 lg:h-64 rounded-3xl overflow-hidden p-1.5 bg-white border-2 transition-all duration-500 shadow-xl group-hover:scale-105 group-hover:-translate-y-2 group-hover:shadow-2xl ${
+                          isFocal
+                            ? 'border-gold-400 ring-4 ring-gold-400/25 shadow-2xl'
+                            : 'border-white/90 hover:border-gold-300'
                         }`}
                       >
-                        <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-teal-950">
+                        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-100">
                           <img
                             src={slide.image}
                             alt={language === 'mr' ? slide.altMr : slide.altEn}
                             className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                            loading="lazy"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-teal-950/80 via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-teal-950/70 via-transparent to-transparent pointer-events-none" />
 
-                          {/* Tag on card */}
-                          <div className="absolute bottom-2 left-2 right-2 text-center">
-                            <span className="inline-block px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[9px] sm:text-[11px] font-bold border border-white/20 line-clamp-1">
+                          {/* Subtle Tag Overlay */}
+                          <div className="absolute bottom-2.5 left-2 right-2 text-center">
+                            <span className="inline-block px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 line-clamp-1">
                               {language === 'mr' ? slide.tagMr : slide.tagEn}
                             </span>
                           </div>
@@ -281,45 +212,34 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
               </div>
             </div>
 
-            {/* Slide Navigation Arrows */}
-            <div className="absolute -bottom-4 inset-x-0 flex items-center justify-between px-2 sm:px-8 z-30 pointer-events-auto">
-              <button
-                onClick={handlePrevSlide}
-                className="h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/95 border border-teal-900/10 shadow-md flex items-center justify-center text-teal-brand hover:text-gold-600 hover:scale-105 active:scale-95 transition-all"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              {/* Indicator dots */}
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-teal-900/10 shadow-2xs">
-                {ARC_SLIDES.map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    onClick={() => {
-                      setIsAutoPlaying(false);
-                      setActiveSlide(dotIdx);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      activeSlide === dotIdx ? 'w-6 bg-gold-500' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                    }`}
-                    aria-label={`Go to slide ${dotIdx + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={handleNextSlide}
-                className="h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/95 border border-teal-900/10 shadow-md flex items-center justify-center text-teal-brand hover:text-gold-600 hover:scale-105 active:scale-95 transition-all"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} />
-              </button>
+            {/* Mobile-Friendly Sliding Card View (< 768px) */}
+            <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-4 w-full justify-start scrollbar-none pointer-events-auto z-20">
+              {ARC_SLIDES.map((slide, idx) => (
+                <div
+                  key={slide.id}
+                  onClick={() => setActiveSlideIndex(idx)}
+                  className="snap-center shrink-0 w-44 h-60 rounded-3xl overflow-hidden p-1.5 bg-white border-2 border-white shadow-lg"
+                >
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-100">
+                    <img
+                      src={slide.image}
+                      alt={language === 'mr' ? slide.altMr : slide.altEn}
+                      className="w-full h-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-teal-950/70 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute bottom-2.5 left-2 right-2 text-center">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold border border-white/20">
+                        {language === 'mr' ? slide.tagMr : slide.tagEn}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Central Dial Content Hub (Heading, Subtitle, CTA exactly like Image 1) */}
-          <div className="mt-14 max-w-2xl mx-auto space-y-4">
+          {/* Central Dial Content Hub (Directly matching Reference Image 1) */}
+          <div className="mt-12 max-w-2xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-teal-900/10 shadow-2xs text-xs font-bold uppercase tracking-widest text-gold-700">
               <Sparkles size={13} className="text-gold-500" />
               <span>{language === 'mr' ? 'उमेद मानसोपचार केंद्र विषयी' : 'About UMED Clinic'}</span>
@@ -359,56 +279,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
               </a>
             </div>
           </div>
-
-          {/* 4 Counter Stats with Live Counting Animation (as shown in Image 1) */}
-          <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <AnimatedStatItem
-              end={10}
-              suffix="+"
-              labelEn="Years of Experience"
-              labelMr="वर्षांचा वैद्यकीय अनुभव"
-              subEn="Dedicated Psychiatric Practice"
-              subMr="लातूरमधील निष्णात मानसोपचार"
-              language={language}
-            />
-
-            <AnimatedStatItem
-              end={5000}
-              suffix="+"
-              labelEn="Patients Guided"
-              labelMr="रुग्ण व कुटुंबे मार्गदर्शन"
-              subEn="Across Marathwada Region"
-              subMr="मराठवाड्यातील विश्वासार्ह केंद्र"
-              language={language}
-            />
-
-            <AnimatedStatItem
-              end={98}
-              suffix="%"
-              labelEn="Client Satisfaction"
-              labelMr="रुग्ण व पालक समाधान"
-              subEn="Compassionate Care Standards"
-              subMr="आदरयुक्त व शांत वातावरण"
-              language={language}
-            />
-
-            <AnimatedStatItem
-              end={1}
-              prefix="1:"
-              labelEn="Personalized Support"
-              labelMr="१:१ सविस्तर संवाद"
-              subEn="30–45 Min Unhurried Sessions"
-              subMr="घाई न करता संपूर्ण लक्ष"
-              language={language}
-            />
-          </div>
         </div>
 
         {/* ==========================================================
             4 CORE CLINICAL DIFFERENTIATORS (BENTO GRID ARCHITECTURE)
             Card 4 is rendered with Guaranteed High-Contrast Legibility!
             ========================================================== */}
-        <div className="mt-16 pt-12 border-t border-slate-200/80">
+        <div className="mt-8 pt-12 border-t border-slate-200/80">
           <div className="max-w-3xl space-y-3 mb-10 reveal-on-scroll">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold-600">
               <span className="h-0.5 w-6 bg-gold-500 rounded-full" />
@@ -608,7 +485,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
             </div>
 
             {/* Bento Item 4: Subsidized Care Desk for Marathwada (6 cols)
-                CRITICAL FIX FOR IMAGE 2: Crystal-clear contrast with guaranteed legibility! */}
+                Guaranteed high-contrast styling: 100% visible on all devices! */}
             <div
               ref={cardTilt4.cardRef}
               onMouseMove={cardTilt4.handleMouseMove}

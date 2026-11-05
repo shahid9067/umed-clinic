@@ -163,6 +163,26 @@
   animation: draw-underline 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
 }
 
+@keyframes underline-draw-ltr {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.underline-left-to-right {
+  transform-origin: left center;
+  animation: underline-draw-ltr 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s 1 forwards;
+  will-change: transform;
+}
+
 @keyframes entrance-fade-down {
   0% {
     opacity: 0;
