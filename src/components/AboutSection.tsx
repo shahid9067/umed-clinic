@@ -80,14 +80,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
   const cardTilt4 = useTilt3D(6);
 
   // Active center card for the smooth sliding arc transition
-  const [activeSlideIndex, setActiveSlideIndex] = useState(2); // Center card (Confidence) is focal
+  const [activeSlideIndex, setActiveSlideIndex] = useState(2); // Center card is focal
+  const [isPaused, setIsPaused] = useState(false);
 
+  // Automatic smooth slide animation every 3.2 seconds
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setActiveSlideIndex((prev) => (prev + 1) % ARC_SLIDES.length);
-    }, 4000);
+    }, 3200);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section
@@ -102,7 +105,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
         {/* ==========================================================
             GRAND SEMI-CIRCULAR ARC DIAL SHOWCASE (Exact Match to Reference)
             ========================================================== */}
-        <div className="relative pt-4 pb-14 text-center max-w-5xl mx-auto reveal-on-scroll">
+        <div
+          className="relative pt-4 pb-14 text-center max-w-5xl mx-auto reveal-on-scroll"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Radial Arc Dial Geometry */}
           <div className="relative mx-auto w-full max-w-5xl h-[310px] sm:h-[380px] lg:h-[420px] flex items-end justify-center overflow-visible">
             {/* SVG Precision Dial Arch with Radial Tick Marks */}
@@ -155,37 +162,40 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
               })}
             </svg>
 
-            {/* Desktop / Tablet Fanned Arc of 5 Cards (Exact Match from Reference Image) */}
+            {/* Desktop / Tablet Fanned Arc of 5 Cards with AUTOMATIC SLIDING ANIMATION */}
             <div className="hidden md:flex absolute top-0 inset-x-0 h-full items-center justify-center pointer-events-none">
               <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
                 {ARC_SLIDES.map((slide, idx) => {
-                  // Pre-calibrated angles and positions for a clean, non-overlapping semicircle fan
+                  // The 5 calibrated slots along the semicircular arc
                   const angles = [-26, -13, 0, 13, 26];
                   const xPositions = [-300, -150, 0, 150, 300];
                   const yPositions = [36, 10, 0, 10, 36];
 
-                  const angle = angles[idx];
-                  const x = xPositions[idx];
-                  const y = yPositions[idx];
-                  const isFocal = idx === activeSlideIndex;
+                  // Dynamically map each card to its current slot based on activeSlideIndex
+                  const slot = (idx - activeSlideIndex + 2 + 5 * 10) % 5;
+                  const angle = angles[slot];
+                  const x = xPositions[slot];
+                  const y = yPositions[slot];
+                  const isFocal = slot === 2;
 
                   return (
                     <div
                       key={slide.id}
                       onClick={() => setActiveSlideIndex(idx)}
-                      className="absolute pointer-events-auto cursor-pointer transition-all duration-700 ease-out group"
+                      className="absolute pointer-events-auto cursor-pointer transition-all duration-900 ease-out group"
                       style={{
                         transform: `translateX(${x}px) translateY(${y}px) rotate(${angle}deg) ${
                           isFocal ? 'scale(1.08)' : 'scale(0.96)'
                         }`,
-                        zIndex: isFocal ? 30 : 20 - Math.abs(idx - 2),
+                        zIndex: isFocal ? 30 : 20 - Math.abs(slot - 2),
                         transformOrigin: 'center 320px',
+                        transition: 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.9s ease, border-color 0.5s ease',
                       }}
                     >
                       <div
                         className={`w-36 sm:w-40 lg:w-44 h-52 sm:h-56 lg:h-64 rounded-3xl overflow-hidden p-1.5 bg-white border-2 transition-all duration-500 shadow-xl group-hover:scale-105 group-hover:-translate-y-2 group-hover:shadow-2xl ${
                           isFocal
-                            ? 'border-gold-400 ring-4 ring-gold-400/25 shadow-2xl'
+                            ? 'border-gold-400 ring-4 ring-gold-400/30 shadow-2xl'
                             : 'border-white/90 hover:border-gold-300'
                         }`}
                       >
@@ -218,7 +228,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
                 <div
                   key={slide.id}
                   onClick={() => setActiveSlideIndex(idx)}
-                  className="snap-center shrink-0 w-44 h-60 rounded-3xl overflow-hidden p-1.5 bg-white border-2 border-white shadow-lg"
+                  className={`snap-center shrink-0 w-44 h-60 rounded-3xl overflow-hidden p-1.5 bg-white border-2 transition-all duration-500 shadow-lg ${
+                    idx === activeSlideIndex ? 'border-gold-400 ring-4 ring-gold-400/20' : 'border-white'
+                  }`}
                 >
                   <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-100">
                     <img
@@ -236,6 +248,20 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Automatic Slide Indicator Dots */}
+          <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6">
+            {ARC_SLIDES.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => setActiveSlideIndex(dotIdx)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeSlideIndex === dotIdx ? 'w-7 bg-gold-500 shadow-xs' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                }`}
+                aria-label={`Slide ${dotIdx + 1}`}
+              />
+            ))}
           </div>
 
           {/* Central Dial Content Hub (Directly matching Reference Image 1) */}
