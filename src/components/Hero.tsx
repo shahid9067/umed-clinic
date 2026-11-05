@@ -77,12 +77,12 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
 
           {/* Main Editorial Headline in Our Signature Theme Colors (Deep Teal & Warm Gold) */}
           <h1
-            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-normal leading-[1.06] tracking-tight text-teal-brand text-balance anim-entrance-up"
+            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-medium leading-[1.06] tracking-tight text-teal-brand text-balance anim-entrance-up"
             style={{ animationDelay: '180ms' }}
           >
             {language === 'mr' ? (
               <>
-                <span className="drop-shadow-xs">निरोगी मन</span><br />
+                <span className="drop-shadow-xs">शांत मन, स्पष्ट विचार</span><br />
                 <span className="relative inline-block italic font-normal font-serif text-gold-600 pb-1">
                   आनंदी जीवनासाठी.
                   <svg
@@ -110,7 +110,7 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
               </>
             ) : (
               <>
-                <span className="drop-shadow-xs">A Clearer Mind</span><br />
+                <span className="drop-shadow-xs">Helping People Find Calm,</span><br />
                 <span className="relative inline-block italic font-normal font-serif text-gold-600 pb-1">
                   For A Brighter You.
                   <svg

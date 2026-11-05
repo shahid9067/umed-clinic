@@ -47,7 +47,7 @@ export default {
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
         marathi: ['Noto Sans Devanagari', 'Plus Jakarta Sans', 'sans-serif'],
       },
