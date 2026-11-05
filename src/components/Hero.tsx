@@ -24,19 +24,19 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
   return (
     <section
       id="home"
-      className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-[#fafaf7] perspective-1000"
+      className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-[#eaf2f1] via-[#f3f7f6] to-[#fafaf7] perspective-1000"
     >
-      {/* 3D Volumetric Ambient Glow Spheres (Teal & Candlelight Gold) */}
+      {/* 3D Volumetric Ambient Glow Spheres (Deep Teal & Warm Gold) */}
       <div
-        className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[520px] bg-gradient-to-b from-teal-200/30 via-gold-200/20 to-transparent blur-3xl pointer-events-none -z-10 rounded-full animate-pulse-subtle"
+        className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[560px] bg-gradient-to-b from-teal-600/15 via-gold-400/15 to-transparent blur-3xl pointer-events-none -z-10 rounded-full animate-pulse-subtle"
         aria-hidden="true"
       />
       <div
-        className="absolute top-32 -left-32 w-96 h-96 bg-teal-800/10 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-24 -left-24 w-[420px] h-[420px] bg-teal-800/12 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
       <div
-        className="absolute top-48 -right-32 w-96 h-96 bg-gold-400/15 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-36 -right-24 w-[420px] h-[420px] bg-gold-400/18 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
@@ -69,15 +69,57 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             {language === 'mr' ? (
               <>
                 <span className="drop-shadow-xs">निरोगी मन</span><br />
-                <span className="italic font-normal font-serif text-gold-600 gold-shimmer">
+                <span className="relative inline-block italic font-normal font-serif text-gold-600 gold-shimmer pb-1">
                   आनंदी जीवनासाठी.
+                  <svg
+                    className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 pointer-events-none overflow-visible"
+                    viewBox="0 0 250 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 10C50 3 130 2 247 9C180 4 90 6 22 12"
+                      stroke="url(#underline-gold-gradient-mr)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      className="animate-draw-underline"
+                    />
+                    <defs>
+                      <linearGradient id="underline-gold-gradient-mr" x1="0" y1="0" x2="250" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#9e732c" />
+                        <stop offset="0.5" stopColor="#dfc476" />
+                        <stop offset="1" stopColor="#b88e38" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </span>
               </>
             ) : (
               <>
                 <span className="drop-shadow-xs">A Clearer Mind</span><br />
-                <span className="italic font-normal font-serif text-gold-600 gold-shimmer">
+                <span className="relative inline-block italic font-normal font-serif text-gold-600 gold-shimmer pb-1">
                   For A Brighter You.
+                  <svg
+                    className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 pointer-events-none overflow-visible"
+                    viewBox="0 0 250 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 10C50 3 130 2 247 9C180 4 90 6 22 12"
+                      stroke="url(#underline-gold-gradient-en)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      className="animate-draw-underline"
+                    />
+                    <defs>
+                      <linearGradient id="underline-gold-gradient-en" x1="0" y1="0" x2="250" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#9e732c" />
+                        <stop offset="0.5" stopColor="#dfc476" />
+                        <stop offset="1" stopColor="#b88e38" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </span>
               </>
             )}
