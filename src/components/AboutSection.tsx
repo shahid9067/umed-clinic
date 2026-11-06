@@ -8,6 +8,8 @@ import {
   ArrowUpRight,
   Heart,
   CheckCircle2,
+  Shield,
+  Phone,
 } from 'lucide-react';
 import { Language } from '../types/clinic';
 import { TRANSLATIONS } from '../data/translations';
@@ -368,150 +370,292 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6">
-            {/* Pillar 1: Unhurried Consultations */}
+            {/* Pillar 1: Unhurried Consultations (Wide Featured Showcase with Image) */}
             <div
               ref={cardTilt1.cardRef}
               onMouseMove={cardTilt1.handleMouseMove}
               onMouseLeave={cardTilt1.handleMouseLeave}
               style={cardTilt1.style}
-              className="lg:col-span-6 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 flex flex-col justify-between group reveal-on-scroll"
+              className="lg:col-span-7 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 sm:p-7 flex flex-col justify-between group reveal-on-scroll overflow-hidden relative"
             >
-              <div>
+              {/* Subtle background ambient tint */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-teal-50/70 rounded-full blur-2xl pointer-events-none -z-0" />
+
+              <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors">
-                    <Ear size={20} />
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors shadow-2xs">
+                      <Ear size={20} />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-gold-700">
+                      {language === 'mr' ? 'सविस्तर संवाद' : 'Unhurried Presence'}
+                    </span>
                   </div>
-                  <span className="font-display text-xl font-bold text-gold-500">01</span>
+                  <span className="font-display text-2xl font-bold text-gold-500">01</span>
                 </div>
 
-                <h4 className="mt-4 text-lg font-bold text-teal-brand tracking-tight">
-                  {language === 'mr' ? 'शांतपणे व सविस्तर ऐकून घेणे' : 'Listen with Unhurried Presence'}
-                </h4>
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                  <div className="sm:col-span-7 space-y-2.5">
+                    <h4 className="text-xl sm:text-2xl font-bold text-teal-brand tracking-tight leading-snug">
+                      {language === 'mr' ? 'शांतपणे व सविस्तर ऐकून घेणे' : 'Listen with Unhurried Presence'}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                      {language === 'mr'
+                        ? 'कोणतीही घाई न करता रुग्णाचे विचार व वेदना समजून घेणे. येथे कोणावरही टीका किंवा लेबल लावले जात नाही.'
+                        : 'Every consultation provides ample time to express what hurts in complete privacy, without rush or judgment.'}
+                    </p>
+                    {/* Live subtle soundwave visualizer */}
+                    <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-teal-900">
+                      <div className="flex items-center gap-1 h-4">
+                        <span className="w-1 bg-teal-600 rounded-full h-3 animate-pulse" />
+                        <span className="w-1 bg-gold-500 rounded-full h-4 animate-pulse" style={{ animationDelay: '150ms' }} />
+                        <span className="w-1 bg-teal-500 rounded-full h-2 animate-pulse" style={{ animationDelay: '300ms' }} />
+                        <span className="w-1 bg-gold-600 rounded-full h-3.5 animate-pulse" style={{ animationDelay: '75ms' }} />
+                        <span className="w-1 bg-teal-700 rounded-full h-2.5 animate-pulse" style={{ animationDelay: '200ms' }} />
+                      </div>
+                      <span className="text-[11px] text-slate-500 font-medium">
+                        {language === 'mr' ? '३०–४५ मिनिटे समर्पित वेळ' : '30–45 Min Dedicated Time'}
+                      </span>
+                    </div>
+                  </div>
 
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {language === 'mr'
-                    ? 'कोणतीही घाई न करता रुग्णाचे विचार व वेदना समजून घेणे. येथे कोणावरही टीका किंवा लेबल लावले जात नाही.'
-                    : 'Every consultation provides ample time to express what hurts in complete privacy, without rush or judgment.'}
-                </p>
+                  <div className="sm:col-span-5">
+                    <div className="relative h-40 sm:h-44 rounded-2xl overflow-hidden shadow-md border-2 border-white group-hover:scale-102 transition-transform duration-500">
+                      <img
+                        src="/images/about-listening.jpg"
+                        alt="Dr. Shradha listening attentively in private consultation"
+                        className="w-full h-full object-cover object-center"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-teal-950/60 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-2 left-2 right-2 text-center">
+                        <span className="inline-block px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[9.5px] font-bold border border-white/20">
+                          {language === 'mr' ? 'शांत समुपदेशन कक्ष' : 'Private Consultation Room'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-gold-700 font-semibold">
-                <span className="flex items-center gap-1">
-                  <Sparkles size={12} className="text-gold-500" />
-                  <span>३०–४५ मिनिटे सविस्तर संवाद</span>
+              <div className="relative z-10 mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-gold-700 font-semibold">
+                <span className="flex items-center gap-1.5">
+                  <Sparkles size={13} className="text-gold-500" />
+                  <span>{language === 'mr' ? 'सहानुभूतीपूर्वक संवाद' : 'Empathetic Clinical Dialogue'}</span>
                 </span>
-                <span className="text-slate-400">100% Privacy</span>
+                <span className="flex items-center gap-1 text-teal-800 font-medium bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-100">
+                  <Shield size={11} className="text-emerald-600" />
+                  <span>100% Privacy</span>
+                </span>
               </div>
             </div>
 
-            {/* Pillar 2: Rational Neuro-Diagnostics */}
+            {/* Pillar 2: Rational Neuro-Diagnostics (5 cols with EEG Image Window) */}
             <div
               ref={cardTilt2.cardRef}
               onMouseMove={cardTilt2.handleMouseMove}
               onMouseLeave={cardTilt2.handleMouseLeave}
               style={cardTilt2.style}
-              className="lg:col-span-6 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 flex flex-col justify-between group reveal-on-scroll delay-100"
+              className="lg:col-span-5 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 sm:p-7 flex flex-col justify-between group reveal-on-scroll delay-100 overflow-hidden relative"
             >
-              <div>
+              <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors">
-                    <Compass size={20} />
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors shadow-2xs">
+                      <Compass size={20} />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-gold-700">
+                      {language === 'mr' ? 'अचूक निदान' : 'Neuro-Diagnostics'}
+                    </span>
                   </div>
-                  <span className="font-display text-xl font-bold text-gold-500">02</span>
+                  <span className="font-display text-2xl font-bold text-gold-500">02</span>
                 </div>
 
-                <h4 className="mt-4 text-lg font-bold text-teal-brand tracking-tight">
+                {/* Top Image Window */}
+                <div className="mt-4 relative h-32 rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                  <img
+                    src="/images/facility-eeg.jpg"
+                    alt="In-house 32-channel digital EEG workstation"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-950/70 via-transparent to-transparent pointer-events-none" />
+                  {/* Glowing Animated EEG Brainwave line overlay */}
+                  <svg
+                    className="absolute inset-x-0 bottom-2 w-full h-8 pointer-events-none opacity-80"
+                    viewBox="0 0 300 40"
+                    fill="none"
+                  >
+                    <path
+                      d="M0 20 Q 30 18, 60 20 T 100 20 L 115 5 L 125 35 L 135 12 L 145 25 L 155 20 Q 180 18, 220 20 T 300 20"
+                      stroke="#dfc476"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-teal-900/80 backdrop-blur-md text-white text-[9px] font-bold border border-white/20">
+                    32-Channel Digital EEG
+                  </span>
+                </div>
+
+                <h4 className="mt-4 text-lg sm:text-xl font-bold text-teal-brand tracking-tight leading-snug">
                   {language === 'mr' ? 'शास्त्रीय व अचूक औषधोपचार' : 'Rational, Science-Backed Treatment'}
                 </h4>
 
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                   {language === 'mr'
-                    ? 'जागतिक वैद्यकीय निकषांनुसार मोजकी औषधे आणि इन-हाउस डिजिटल ३२-चॅनेल ईईजी द्वारे अचूक निदान.'
+                    ? 'जागतिक निकषांनुसार मोजकी औषधे आणि इन-हाउस डिजिटल ३२-चॅनेल ईईजी द्वारे अचूक निदान.'
                     : 'Calibrated minimum effective medication combined with in-house 32-channel digital EEG brain mapping.'}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-teal-700 font-semibold">
-                <span className="flex items-center gap-1">
-                  <Activity size={12} className="text-gold-600" />
+              <div className="relative z-10 mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-teal-700 font-semibold">
+                <span className="flex items-center gap-1.5">
+                  <Activity size={13} className="text-gold-600" />
                   <span>Digital EEG & MBT</span>
                 </span>
-                <span className="text-emerald-700 font-medium">Safe Dosages</span>
+                <span className="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">
+                  {language === 'mr' ? 'कमी औषध डोस' : 'Safe Dosages'}
+                </span>
               </div>
             </div>
 
-            {/* Pillar 3: Caregiver Partnership */}
+            {/* Pillar 3: Caregiver Partnership (5 cols with Family Counseling Image) */}
             <div
               ref={cardTilt3.cardRef}
               onMouseMove={cardTilt3.handleMouseMove}
               onMouseLeave={cardTilt3.handleMouseLeave}
               style={cardTilt3.style}
-              className="lg:col-span-6 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 flex flex-col justify-between group reveal-on-scroll delay-150"
+              className="lg:col-span-5 card-3d card-3d-white rounded-3xl bg-white border border-slate-200/90 shadow-soft p-6 sm:p-7 flex flex-col justify-between group reveal-on-scroll delay-150 overflow-hidden relative"
             >
-              <div>
+              <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors">
-                    <HeartHandshake size={20} />
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-10 w-10 rounded-xl bg-teal-50 text-teal-brand flex items-center justify-center border border-teal-100 group-hover:bg-gold-50 group-hover:text-gold-700 transition-colors shadow-2xs">
+                      <HeartHandshake size={20} />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-gold-700">
+                      {language === 'mr' ? 'कुटुंब सहकार्य' : 'Caregiver Alliance'}
+                    </span>
                   </div>
-                  <span className="font-display text-xl font-bold text-gold-500">03</span>
+                  <span className="font-display text-2xl font-bold text-gold-500">03</span>
                 </div>
 
-                <h4 className="mt-4 text-lg font-bold text-teal-brand tracking-tight">
+                {/* Top Image Window */}
+                <div className="mt-4 relative h-32 rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                  <img
+                    src="/images/care/care-counselling.jpg"
+                    alt="Family and caregiver counseling session"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-950/70 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-teal-900/80 backdrop-blur-md text-white text-[9px] font-bold border border-white/20">
+                    {language === 'mr' ? 'कुटुंब समुपदेशन' : 'Family Guidance'}
+                  </span>
+                </div>
+
+                <h4 className="mt-4 text-lg sm:text-xl font-bold text-teal-brand tracking-tight leading-snug">
                   {language === 'mr' ? 'कुटुंबाला सोबत घेऊन शाश्वत आरोग्य' : 'Walk Alongside You & Your Family'}
                 </h4>
 
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                   {language === 'mr'
                     ? 'औषधांसोबतच कुटुंबाचे सहकार्य, समुपदेशन व टप्प्याटप्प्याने औषध कमी करून शाश्वत स्वास्थ्य मिळवून देणे.'
                     : 'Caregiver counseling, positive home environment guidance, and structured medicine tapering pathways.'}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-semibold">
-                <span>Family Counseling</span>
-                <span className="text-emerald-700">Sustainable Recovery</span>
+              <div className="relative z-10 mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-semibold">
+                <span className="flex items-center gap-1.5 text-teal-800">
+                  <CheckCircle2 size={13} className="text-emerald-600" />
+                  <span>{language === 'mr' ? 'टप्प्याटप्प्याने औषधमुक्ती' : 'Structured Tapering'}</span>
+                </span>
+                <span className="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">
+                  {language === 'mr' ? 'शाश्वत सुधारणा' : 'Sustainable Recovery'}
+                </span>
               </div>
             </div>
 
-            {/* Pillar 4: Subsidized Care Desk */}
+            {/* Pillar 4: Subsidized Care Desk (Wide Luxury Dark Architectural Focal Card) */}
             <div
               ref={cardTilt4.cardRef}
               onMouseMove={cardTilt4.handleMouseMove}
               onMouseLeave={cardTilt4.handleMouseLeave}
               style={{ ...cardTilt4.style, backgroundColor: '#0f3d43' }}
-              className="lg:col-span-6 card-3d card-3d-dark rounded-3xl !bg-[#0f3d43] text-white shadow-xl p-6 flex flex-col justify-between relative overflow-hidden group reveal-on-scroll delay-200 border-2 border-gold-400/40"
+              className="lg:col-span-7 card-3d card-3d-dark rounded-3xl !bg-gradient-to-br !from-[#0f3d43] !via-[#0a2f34] !to-[#061b1e] text-white shadow-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden group reveal-on-scroll delay-200 border-2 border-gold-400/50"
             >
+              {/* Golden Ambient Lighting Aura */}
+              <div className="absolute -top-12 -right-12 w-72 h-72 rounded-full bg-gold-400/15 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -left-10 w-60 h-60 rounded-full bg-teal-500/10 blur-2xl pointer-events-none" />
+
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="h-10 w-10 rounded-xl bg-white/15 text-gold-300 flex items-center justify-center border border-white/20">
-                    <Heart size={20} className="text-gold-300" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-10 w-10 rounded-xl bg-white/15 text-gold-300 flex items-center justify-center border border-white/20 shadow-xs">
+                      <Heart size={20} className="text-gold-300" />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-gold-300">
+                      {language === 'mr' ? 'सामाजिक बांधिलकी' : 'Community Mission'}
+                    </span>
                   </div>
-                  <span className="font-display text-xl font-bold text-gold-400">04</span>
+                  <span className="font-display text-2xl font-bold text-gold-400">04</span>
                 </div>
 
-                <h4 className="mt-4 text-lg font-bold text-white tracking-tight">
-                  {language === 'mr'
-                    ? 'गरीब व गरजू रुग्णांसाठी माफक दरात सुविधा'
-                    : 'Subsidized Care Desk for Farming Families'}
-                </h4>
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                  <div className="sm:col-span-8 space-y-2.5">
+                    <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+                      {language === 'mr'
+                        ? 'गरीब व शेतकरी कुटुंबांसाठी माफक दरात सुविधा'
+                        : 'Subsidized Care Desk for Farming Families'}
+                    </h4>
 
-                <p className="mt-2 text-xs sm:text-sm text-teal-50 leading-relaxed font-normal">
-                  {language === 'mr'
-                    ? 'मराठवाड्यातील शेतकरी व गरजू कुटुंबांना पैशांअभावी उपचारांपासून वंचित राहावे लागू नये यासाठी विशेष सवलत.'
-                    : 'Subsidized consultations, diagnostics, and inpatient care for farming and economically weaker families.'}
-                </p>
+                    <p className="text-xs sm:text-sm text-teal-100/90 leading-relaxed font-normal">
+                      {language === 'mr'
+                        ? 'मराठवाड्यातील शेतकरी व गरजू कुटुंबांना पैशांअभावी उपचारांपासून वंचित राहावे लागू नये यासाठी विशेष सवलत व सुलभ उपचार.'
+                        : 'UMED Clinic firmly believes economic constraints should never prevent access to compassionate psychiatric healing. Subsidized care for deserving families across Marathwada.'}
+                    </p>
+
+                    <div className="pt-1 flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 text-gold-200 text-[11px] font-semibold border border-white/15">
+                        <CheckCircle2 size={12} className="text-gold-400" />
+                        <span>{language === 'mr' ? 'सुलभ ओपीडी व आयपीडी' : 'Subsidized OPD & IPD'}</span>
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 text-teal-200 text-[11px] font-semibold border border-white/15">
+                        <span>{language === 'mr' ? 'लातूर · बीड · धाराशीव' : 'Latur · Beed · Dharashiv'}</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-4 flex sm:justify-end">
+                    <div className="rounded-2xl border border-white/20 bg-white/10 p-3.5 backdrop-blur-md text-center w-full max-w-[190px] shadow-lg">
+                      <img
+                        src="/images/omed_logo.jpeg"
+                        alt="UMED Care Desk"
+                        className="h-12 w-12 mx-auto rounded-full object-cover object-top border-2 border-gold-400 shadow-sm"
+                      />
+                      <p className="mt-2 font-marathi font-bold text-gold-300 text-[11px]">
+                        “निरोगी मन, आनंदी जीवन”
+                      </p>
+                      <p className="text-[9.5px] text-teal-200 mt-0.5">
+                        UMED Support Desk
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="relative z-10 mt-5 pt-3 border-t border-white/20 flex items-center justify-between text-xs">
-                <span className="text-gold-300 font-semibold flex items-center gap-1">
-                  <CheckCircle2 size={13} className="text-gold-400" />
-                  <span>Fair & Subsidized</span>
+              <div className="relative z-10 mt-6 pt-3.5 border-t border-white/20 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <span className="text-gold-300 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-gold-400" />
+                  <span>{language === 'mr' ? 'माफक व पारदर्शक शुल्क' : 'Fair, Transparent & Subsidized'}</span>
                 </span>
                 <a
                   href="tel:9067089323"
-                  className="font-bold text-teal-950 bg-gold-400 hover:bg-gold-300 px-3.5 py-1 rounded-full transition-colors"
+                  className="inline-flex items-center gap-2 font-bold text-teal-950 bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-full transition-all duration-200 shadow-md hover:scale-105"
                 >
-                  {language === 'mr' ? 'माहिती विचारा' : 'Inquire Desk'}
+                  <Phone size={13} className="text-teal-950" />
+                  <span>{language === 'mr' ? 'माहिती विचारा' : 'Inquire Desk'}</span>
                 </a>
               </div>
             </div>
