@@ -318,7 +318,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ language }) => {
               <span>{language === 'mr' ? 'उमेद मानसोपचार केंद्र' : 'About UMED Clinic'}</span>
             </div>
 
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-teal-brand tracking-tight text-balance leading-tight">
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-brand tracking-tight text-balance leading-tight">
               {language === 'mr' ? (
                 <>
                   शांत मन, स्पष्ट विचार आणि <br className="hidden sm:inline" />

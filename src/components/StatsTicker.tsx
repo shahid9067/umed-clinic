@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, UserCheck, Activity, Building, Sparkles, Clock, LucideIcon } from 'lucide-react';
+import { ShieldCheck, UserCheck, Activity, Building, LucideIcon } from 'lucide-react';
 import { Language } from '../types/clinic';
 import { useCountUp } from '../hooks/useCountUp';
 
@@ -91,36 +91,11 @@ export const StatsTicker: React.FC<StatsTickerProps> = ({ language }) => {
   ];
 
   return (
-    <div className="border-y border-teal-900/15 bg-gradient-to-r from-teal-950 via-teal-brand to-teal-950 text-white py-6 overflow-hidden relative shadow-xl">
+    <div className="border-y border-teal-900/15 bg-gradient-to-r from-teal-950 via-teal-brand to-teal-950 text-white py-8 sm:py-10 overflow-hidden relative shadow-xl">
       {/* Subtle gold grid reflection */}
       <div className="absolute inset-0 bg-[radial-gradient(#b88e38_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Live Status Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-5 border-b border-teal-800/40 text-xs">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="font-semibold">
-              {language === 'mr' ? 'आज ओपीडी सुरू: सकाळी १० ते रात्री ८' : 'OPD Consultations Active Today · 10:00 AM – 8:00 PM'}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-teal-200/90 text-xs font-medium">
-            <span className="inline-flex items-center gap-1.5 font-marathi text-gold-300 font-bold bg-white/5 px-2.5 py-0.5 rounded-full border border-gold-400/20">
-              <Sparkles size={13} className="text-gold-400" />
-              <span>निरोगी मन, आनंदी जीवन</span>
-            </span>
-            <span className="hidden sm:inline-block text-teal-400">·</span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-teal-300">
-              <Clock size={12} className="text-gold-400" />
-              <span>Shivaji Chowk, Latur</span>
-            </span>
-          </div>
-        </div>
-
         {/* 4 Interactive 3D Stat Blocks with Counting Animation */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {statConfigs.map((cfg, idx) => (
