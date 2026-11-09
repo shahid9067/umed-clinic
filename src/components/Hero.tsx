@@ -313,26 +313,27 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Main Central Mind Portrait on 3D Pedestal */}
+          {/* Main Central Mind Portrait on 3D Pedestal (Transparent Cutout PNG) */}
           <div
             ref={centerTilt.ref}
             onMouseMove={centerTilt.onMouseMove}
             onMouseLeave={centerTilt.onMouseLeave}
             style={centerTilt.style}
-            className="relative mx-auto max-w-2xl px-4 flex justify-center cursor-pointer"
+            className="relative mx-auto max-w-lg sm:max-w-xl px-4 flex justify-center cursor-pointer select-none"
           >
-            <div className="relative overflow-hidden rounded-3xl w-full max-w-xl group">
-              {/* Soft radial pedestal glow behind head */}
-              <div className="absolute inset-0 bg-radial from-teal-400/20 via-transparent to-transparent pointer-events-none rounded-full blur-2xl" />
+            <div className="relative w-full flex justify-center group">
+              {/* Soft glowing ambient pedestal aura behind the cutout */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[440px] h-[340px] sm:h-[440px] bg-radial from-gold-400/25 via-teal-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
 
               <img
-                src="/images/hero-mind-portrait.png"
-                alt="Mental Clarity and Healing at UMED Clinic"
-                className="w-full h-auto object-contain mx-auto transition-transform duration-700 ease-out group-hover:scale-102"
+                src="/images/hero-wellness-peaceful.png"
+                alt="Serene mental clarity and emotional wellness at UMED Clinic"
+                className="w-full max-h-[460px] sm:max-h-[540px] object-contain mx-auto drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-103"
+                loading="eager"
               />
 
               {/* Seamless gradient fade at the bottom into the page */}
-              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#fafaf7] via-[#fafaf7]/50 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#fafaf7] via-[#fafaf7]/60 to-transparent pointer-events-none" />
             </div>
           </div>
 
