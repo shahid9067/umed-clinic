@@ -43,14 +43,14 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
         className="absolute top-24 -left-24 w-[420px] h-[420px] bg-teal-800/12 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
-      {/* Moving Light Gold Volumetric Glow */}
+      {/* Moving Light Gold Volumetric Glow (Visible ONLY on laptop/desktop: hidden md:block) */}
       <div
-        className="absolute top-28 right-0 sm:right-12 w-[460px] h-[460px] bg-gradient-to-br from-gold-400/35 via-gold-300/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-gold-move"
+        className="hidden md:block absolute top-28 right-0 sm:right-12 w-[460px] h-[460px] bg-gradient-to-br from-gold-400/35 via-gold-300/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-gold-move"
         aria-hidden="true"
       />
-      {/* Central Moving Light Gold Halo */}
+      {/* Central Moving Light Gold Halo (Visible ONLY on laptop/desktop: hidden md:block) */}
       <div
-        className="absolute top-1/2 left-1/2 w-[520px] h-[520px] bg-radial from-gold-400/25 via-gold-500/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-gold-halo"
+        className="hidden md:block absolute top-1/2 left-1/2 w-[520px] h-[520px] bg-radial from-gold-400/25 via-gold-500/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-gold-halo"
         aria-hidden="true"
       />
 
@@ -322,11 +322,26 @@ export const Hero: React.FC<HeroProps> = ({ language, onOpenBooking }) => {
             className="relative mx-auto max-w-lg sm:max-w-xl px-4 flex justify-center cursor-pointer select-none"
           >
             <div className="relative w-full flex justify-center group">
-              {/* Soft glowing ambient pedestal aura behind the cutout */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[440px] h-[340px] sm:h-[440px] bg-radial from-gold-400/25 via-teal-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+              {/* Animated Aura & Orbit Rings around the man (Visible ONLY on laptop/desktop: hidden md:block) */}
+              <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10">
+                {/* Outer pulsing gold & teal aura */}
+                <div
+                  className="w-[380px] sm:w-[460px] lg:w-[520px] h-[380px] sm:h-[460px] lg:h-[520px] bg-radial from-gold-400/25 via-teal-600/12 to-transparent rounded-full blur-3xl animate-pulse"
+                  style={{ animationDuration: '4s' }}
+                />
+                {/* Delicate orbital ring with subtle gold sheen */}
+                <div
+                  className="absolute inset-0 rounded-full border border-gold-400/20 animate-spin-slow pointer-events-none"
+                  style={{ animationDuration: '28s' }}
+                />
+                <div
+                  className="absolute -inset-6 rounded-full border border-teal-500/15 animate-spin-slow pointer-events-none"
+                  style={{ animationDuration: '40s', animationDirection: 'reverse' }}
+                />
+              </div>
 
               <img
-                src="/images/hero-wellness-peaceful.png"
+                src="/images/hero-wellness-man.png"
                 alt="Serene mental clarity and emotional wellness at UMED Clinic"
                 className="w-full max-h-[460px] sm:max-h-[540px] object-contain mx-auto drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-103"
                 loading="eager"
